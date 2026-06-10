@@ -1,0 +1,2647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>有理有据 - 把委屈变成底气</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* 骨架屏样式 */
+        .skeleton-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: skeleton-fadeout 0.5s ease-out 0.5s forwards;
+        }
+        .skeleton-screen::before {
+            content: '';
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #ddd 0%, #ccc 50%, #ddd 100%);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            animation: skeleton-pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes skeleton-pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+        
+        @keyframes skeleton-fadeout {
+            from { opacity: 1; }
+            to { opacity: 0; pointer-events: none; }
+        }
+        
+        :root {
+            --primary: #e07a3a;
+            --primary-light: #fff5ed;
+            --primary-dark: #c2692c;
+            --primary-glow: rgba(224, 122, 58, 0.5);
+            --blue: #4a8bc0;
+            --blue-light: #f3f8fb;
+            --blue-glow: rgba(74, 139, 192, 0.3);
+            --green: #5cb85c;
+            --yellow: #f0ad4e;
+            --red: #d9534f;
+            --gray: #9e9e9e;
+            --gray-light: #f9f9f9;
+            --gray-border: rgba(0, 0, 0, 0.06);
+            --bg-gradient: linear-gradient(135deg, #fff8f3 0%, #fef9f6 30%, #f5f9fc 60%, #f0f5fa 100%);
+            --text: #1e2f4a;
+            --text-light: #7a7a7a;
+            --text-muted: #a0a0a0;
+            --glass: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --shadow-glow: 0 8px 25px rgba(224, 122, 58, 0.3);
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-full: 9999px;
+        }
+        body {
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            min-height: 100vh;
+            padding-bottom: 120px;
+            backdrop-filter: blur(20px);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .main-wrap {
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 16px;
+            position: relative;
+        }
+        
+        /* 背景装饰 */
+        .bg-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .bg-decoration::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float-slow 8s ease-in-out infinite;
+            opacity: 0.6;
+        }
+        .bg-decoration::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--blue-glow) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float-slow 10s ease-in-out infinite reverse;
+            opacity: 0.5;
+        }
+        
+        /* 动画 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        @keyframes float-slow {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -20px) scale(1.1); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+            50% { transform: translateX(-50%) scale(1.05); opacity: 0.8; }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 8px 25px rgba(224, 122, 58, 0.4); }
+            50% { box-shadow: 0 12px 40px rgba(224, 122, 58, 0.6); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scale-in {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* 头部 */
+        .header {
+            text-align: center;
+            padding: 48px 0 32px;
+            position: relative;
+            z-index: 1;
+        }
+        .header-bg {
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, rgba(224,122,58,0.2) 0%, rgba(74,139,192,0.08) 50%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+        .logo {
+            font-size: 44px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 6px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.02);
+        }
+        .logo-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: 0 10px 30px rgba(224,122,58,0.4);
+            animation: float 3s ease-in-out infinite, pulse-glow 2s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover .logo-icon {
+            transform: scale(1.1);
+        }
+        .sub {
+            color: var(--text-light);
+            font-size: 16px;
+            margin-top: 12px;
+            position: relative;
+            z-index: 2;
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+        .help-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            color: var(--primary-dark);
+            font-size: 14px;
+            padding: 10px 24px;
+            border-radius: 30px;
+            margin-top: 24px;
+            position: relative;
+            z-index: 2;
+            animation: pulse 3s ease-in-out infinite;
+            box-shadow: 0 6px 20px rgba(224,122,58,0.18);
+            transition: all 0.3s ease;
+        }
+        .help-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(224,122,58,0.25);
+        }
+        .help-badge strong { 
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--primary);
+        }
+        .help-badge .sparkle {
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        /* 场景选择 */
+        .scene-section {
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 热门场景 */
+        .hot-section {
+            margin-bottom: 20px;
+            animation: fade-in-up 0.5s ease-out;
+        }
+        .hot-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .hot-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .hot-item {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            color: var(--text);
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-sm);
+            font-weight: 500;
+        }
+        .hot-item:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-md);
+            background: linear-gradient(135deg, var(--primary-light) 0%, #fff 100%);
+            border-color: var(--primary);
+            color: var(--primary-dark);
+        }
+        .hot-item:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+        .section-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 4px;
+        }
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .tag {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            color: var(--text);
+            padding: 14px 22px;
+            border-radius: 50px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+            font-weight: 500;
+        }
+        .tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            transition: left 0.6s ease;
+        }
+        .tag:hover::before {
+            left: 100%;
+        }
+        .tag:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(224,122,58,0.4);
+        }
+        .tag:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+        .tag.on {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #fff;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-4px) scale(1.02);
+        }
+        .tag.on::before {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        }
+        .tag.on:hover {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 8px 25px rgba(224,122,58,0.4);
+            transform: translateY(-3px);
+        }
+        .tag.on::before {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        }
+
+        /* 输入区 */
+        .input-box {
+            background: var(--glass);
+            backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .input-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+        .input-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--blue) 40%, var(--green) 100%);
+            animation: shimmer 3s linear infinite;
+            background-size: 200% 100%;
+        }
+        .input-box .label {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 18px;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .desc-textarea {
+            width: 100%;
+            border: 2px solid rgba(224,122,58,0.18);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            font-size: 16px;
+            outline: none;
+            resize: vertical;
+            min-height: 150px;
+            font-family: inherit;
+            line-height: 1.65;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(12px);
+            color: var(--text);
+        }
+        .desc-textarea:focus {
+            border-color: var(--primary);
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 0 0 6px rgba(224,122,58,0.12);
+            transform: translateY(-2px);
+        }
+        .desc-textarea::placeholder {
+            color: var(--text-muted);
+        }
+        .tips {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: rgba(224,122,58,0.08);
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(224,122,58,0.12);
+        }
+        .gen-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 17px;
+            font-weight: 600;
+            margin-top: 22px;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .gen-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        .gen-btn:hover::before {
+            left: 100%;
+        }
+        .gen-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(224,122,58,0.5);
+        }
+        .gen-btn:active {
+            transform: translateY(-1px);
+        }
+        .gen-btn .magic {
+            font-size: 20px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        /* 逻辑谬误检测 */
+        .fallacy-warning {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: rgba(240,173,78,0.1);
+            border-radius: 12px;
+            border-left: 4px solid var(--yellow);
+            display: none;
+        }
+        .fallacy-warning.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+        .fallacy-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .fallacy-icon {
+            font-size: 18px;
+        }
+        .fallacy-title {
+            font-weight: 600;
+            color: #8a6d3b;
+            font-size: 14px;
+        }
+        .fallacy-desc {
+            font-size: 13px;
+            color: #6b5b3c;
+            line-height: 1.5;
+        }
+        .fallacy-highlight {
+            background: rgba(240,173,78,0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* 加载动画 */
+        .loading-box {
+            display: none;
+            text-align: center;
+            padding: 60px 0;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            margin-bottom: 24px;
+        }
+        .loading-box.show { 
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .loading-animation {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            position: relative;
+        }
+        .loading-ring {
+            position: absolute;
+            border: 4px solid rgba(224,122,58,0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+            animation: ring 1.2s linear infinite;
+        }
+        .loading-ring:nth-child(2) {
+            animation-delay: 0.15s;
+            border-top-color: var(--blue);
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+        }
+        .loading-ring:nth-child(3) {
+            animation-delay: 0.3s;
+            border-top-color: var(--green);
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+        }
+        .loading-text {
+            font-size: 16px;
+            color: var(--text-light);
+            animation: pulseText 1.5s ease-in-out infinite;
+        }
+
+        /* 结果卡片 */
+        .result-area { 
+            display: none;
+            animation: slideUp 0.5s ease-out;
+        }
+        .result-area.show { display: block; }
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 22px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            border-left: 6px solid var(--gray);
+            transition: all 0.35s;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            opacity: 0.05;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+        .card-reason {
+            border-left-color: var(--primary);
+            background: linear-gradient(135deg, rgba(224,122,58,0.08) 0%, rgba(255,255,255,0.7) 100%);
+        }
+        .card-reason::before {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📌%3C/text%3E%3C/svg%3E") no-repeat;
+        }
+        .card-script {
+            border-left-color: var(--blue);
+            background: linear-gradient(135deg, rgba(74,139,192,0.08) 0%, rgba(255,255,255,0.7) 100%);
+        }
+        .card-script::before {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💬%3C/text%3E%3C/svg%3E") no-repeat;
+        }
+        .card-rebuttal {
+            border-left-color: var(--gray);
+            background: linear-gradient(135deg, rgba(158,158,158,0.08) 0%, rgba(255,255,255,0.7) 100%);
+        }
+        .card-rebuttal::before {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🛡️%3C/text%3E%3C/svg%3E") no-repeat;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+            animation: bounceIn 0.5s ease-out;
+        }
+        .card-reason .card-icon {
+            background: rgba(224,122,58,0.15);
+        }
+        .card-script .card-icon {
+            background: rgba(74,139,192,0.15);
+        }
+        .card-rebuttal .card-icon {
+            background: rgba(158,158,158,0.15);
+        }
+        .card h3 { 
+            font-size: 17px; 
+            font-weight: 600;
+            color: var(--text); 
+        }
+        .card p {
+            font-size: 15px; 
+            color: #333;
+            line-height: 1.8; 
+            white-space: pre-wrap;
+            position: relative;
+            z-index: 1;
+        }
+        .card p strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* 复制按钮 */
+        .copy-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 18px;
+            padding: 14px 24px;
+            background: rgba(255,255,255,0.8);
+            border: 2px solid var(--blue);
+            color: var(--blue);
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            width: fit-content;
+            box-shadow: 0 4px 12px rgba(74,139,192,0.1);
+        }
+        .copy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74,139,192,0.2);
+            background: var(--blue);
+            color: white;
+        }
+        .copy-btn.done {
+            background: var(--green);
+            color: white;
+            border-color: var(--green);
+            box-shadow: 0 4px 12px rgba(92,184,92,0.3);
+        }
+
+        /* 证据清单 */
+        .evidence-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 22px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            border-left: 6px solid var(--yellow);
+            background: linear-gradient(135deg, rgba(240,173,78,0.06) 0%, rgba(255,255,255,0.7) 100%);
+        }
+        .evidence-card .card-icon {
+            background: rgba(240,173,78,0.15);
+        }
+        .evidence-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .evidence-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: rgba(240,173,78,0.12);
+            border-radius: 25px;
+            font-size: 14px;
+            color: #8a6d3b;
+            transition: all 0.3s;
+            animation: fadeInUp 0.4s ease-out backwards;
+        }
+        .evidence-item:hover {
+            transform: translateY(-2px);
+            background: rgba(240,173,78,0.2);
+        }
+        .evidence-item:nth-child(1) { animation-delay: 0.1s; }
+        .evidence-item:nth-child(2) { animation-delay: 0.2s; }
+        .evidence-item:nth-child(3) { animation-delay: 0.3s; }
+        .evidence-item:nth-child(4) { animation-delay: 0.4s; }
+        .evidence-item:nth-child(5) { animation-delay: 0.5s; }
+        .evidence-item .check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(92,184,92,0.2);
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* 快捷操作 */
+        .action-row {
+            display: flex;
+            gap: 14px;
+            margin-top: 20px;
+        }
+        .action-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        .action-btn:hover::before {
+            left: 100%;
+        }
+        .action-btn-call {
+            background: linear-gradient(135deg, var(--green) 0%, #4cae4c 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(92,184,92,0.4);
+        }
+        .action-btn-call:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(92,184,92,0.5);
+        }
+        .action-btn-share {
+            background: rgba(255,255,255,0.8);
+            color: var(--text);
+            border: 2px solid rgba(224,122,58,0.3);
+        }
+        .action-btn-share:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(224,122,58,0.2);
+        }
+
+        /* 反馈区域 */
+        .feedback-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 24px;
+            padding: 20px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        }
+        .feedback-row span {
+            color: var(--text-light);
+            font-size: 15px;
+        }
+        .feedback-btn {
+            background: rgba(255,255,255,0.6);
+            border: 2px solid rgba(224,122,58,0.2);
+            border-radius: 50%;
+            font-size: 36px;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 12px;
+        }
+        .feedback-btn:hover {
+            transform: scale(1.3);
+            border-color: var(--primary);
+            background: rgba(224,122,58,0.1);
+        }
+        .feedback-btn.liked {
+            animation: bounceHeart 0.6s ease-out;
+            color: var(--red);
+        }
+
+        /* 再试一次按钮 */
+        .retry-btn {
+            width: 100%;
+            padding: 16px;
+            margin-top: 20px;
+            background: rgba(255,255,255,0.6);
+            border: 2px solid rgba(224,122,58,0.3);
+            border-radius: 16px;
+            color: var(--text);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .retry-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(224,122,58,0.15);
+        }
+
+        /* 历史记录 */
+        .history-section {
+            margin-top: 36px;
+            padding-bottom: 24px;
+        }
+        .history-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .history-title h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .clear-history {
+            font-size: 14px;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        .clear-history:hover {
+            color: var(--red);
+            background: rgba(217,83,79,0.1);
+        }
+        .history-list {
+            display: none;
+        }
+        .history-list.show {
+            display: block;
+        }
+        .history-item {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .history-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+            border-color: rgba(224,122,58,0.3);
+        }
+        .history-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .history-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .history-content p {
+            font-size: 15px;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 6px;
+        }
+        .history-content span {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        .history-empty {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+            font-size: 15px;
+        }
+
+        /* 导出按钮 */
+        .export-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .export-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px;
+            background: rgba(255,255,255,0.7);
+            border: 1px solid rgba(74,139,192,0.3);
+            border-radius: 14px;
+            color: var(--blue);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .export-btn:hover {
+            background: var(--blue);
+            color: white;
+            border-color: var(--blue);
+            transform: translateY(-2px);
+        }
+
+        /* 底部提示 */
+        .footer-note {
+            text-align: center;
+            margin-top: 36px;
+            padding: 24px;
+            color: #c5bbb4;
+            font-size: 13px;
+            line-height: 1.8;
+            background: rgba(0,0,0,0.02);
+            border-radius: 18px;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* 反馈链接 */
+        .feedback-link {
+            text-align: center;
+            margin-top: 20px;
+            padding: 16px;
+            color: var(--text-muted);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .feedback-link:hover {
+            color: var(--primary);
+        }
+        .feedback-link .link-text {
+            color: var(--primary);
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        .feedback-link:hover .link-text {
+            color: var(--primary-dark);
+        }
+        
+        /* 反馈弹窗样式 */
+        .feedback-modal {
+            max-width: 340px;
+            padding: 28px;
+        }
+        .feedback-textarea {
+            width: 100%;
+            height: 120px;
+            border: 1px solid rgba(224,122,58,0.2);
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: none;
+            outline: none;
+            margin-top: 16px;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .feedback-textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(224,122,58,0.1);
+        }
+        .feedback-textarea::placeholder {
+            color: var(--text-muted);
+        }
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            justify-content: flex-end;
+        }
+        .modal-btn-cancel {
+            background: rgba(0,0,0,0.05);
+            color: var(--text-light);
+        }
+        .modal-btn-cancel:hover {
+            background: rgba(0,0,0,0.1);
+        }
+        .modal-btn-submit {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        /* 动画 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.8; transform: translateX(-50%) scale(1.05); }
+        }
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.4; transform: scale(0.8) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.3) rotate(180deg); }
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes ring {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes pulseText {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes bounceHeart {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.5); }
+            50% { transform: scale(1.2); }
+            75% { transform: scale(1.4); }
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 弹窗 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.show {
+            display: flex;
+            animation: fadeIn 0.2s;
+        }
+        .modal {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 28px;
+            max-width: 360px;
+            width: 100%;
+            animation: slideUp 0.3s;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .modal-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 20px;
+            animation: bounceIn 0.4s ease-out;
+        }
+        .modal h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+        .modal p {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        .modal-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(224,122,58,0.3);
+        }
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(224,122,58,0.4);
+        }
+
+        /* 底部工具栏 */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            padding: 12px 16px;
+            padding-bottom: calc(12px + env(safe-area-inset-bottom));
+            box-shadow: 0 -8px 30px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 12px;
+            max-width: 460px;
+            margin: 0 auto;
+            border-radius: 24px 24px 0 0;
+        }
+        .bottom-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: all 0.3s;
+            font-size: 12px;
+            border-radius: 16px;
+        }
+        .bottom-btn.active,
+        .bottom-btn:hover {
+            color: var(--primary);
+            background: rgba(224,122,58,0.08);
+        }
+        .bottom-btn svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        /* 法律条款查询卡片 */
+        .law-card {
+            border-left-color: var(--red);
+            background: linear-gradient(135deg, rgba(217,83,79,0.06) 0%, rgba(255,255,255,0.7) 100%);
+        }
+        .law-card::before {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📜%3C/text%3E%3C/svg%3E") no-repeat;
+        }
+        .law-card .card-icon {
+            background: rgba(217,83,79,0.15);
+        }
+        .law-list {
+            margin-top: 12px;
+        }
+        .law-item {
+            padding: 12px;
+            background: rgba(217,83,79,0.08);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .law-item:last-child {
+            margin-bottom: 0;
+        }
+        .law-item:hover {
+            background: rgba(217,83,79,0.12);
+            transform: translateX(5px);
+        }
+        .law-item-title {
+            font-weight: 600;
+            color: var(--red);
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        .law-item-desc {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* 论证强度评分 */
+        .strength-card {
+            border-left-color: var(--green);
+            background: linear-gradient(135deg, rgba(92,184,92,0.06) 0%, rgba(255,255,255,0.7) 100%);
+        }
+        .strength-card::before {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💪%3C/text%3E%3C/svg%3E") no-repeat;
+        }
+        .strength-card .card-icon {
+            background: rgba(92,184,92,0.15);
+        }
+        .strength-bar {
+            margin-top: 16px;
+            height: 12px;
+            background: rgba(92,184,92,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .strength-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--green) 0%, var(--yellow) 50%, var(--red) 100%);
+            border-radius: 6px;
+            transition: width 1s ease-out;
+            position: relative;
+        }
+        .strength-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .strength-score {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--green);
+            text-align: center;
+            margin-top: 12px;
+        }
+        .strength-label {
+            font-size: 13px;
+            color: var(--text-light);
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        /* 响应式设计 */
+        
+        /* 平板端 (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .main-wrap {
+                padding: 0 16px;
+            }
+            .logo {
+                font-size: 36px;
+            }
+            .tag-list {
+                justify-content: center;
+            }
+            .tag {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            .input-box {
+                padding: 24px;
+            }
+            .card {
+                padding: 24px;
+            }
+        }
+        
+        /* 手机端 (481px - 767px) */
+        @media (max-width: 767px) {
+            .main-wrap {
+                padding: 0 12px;
+            }
+            .header {
+                padding: 20px 0;
+            }
+            .logo {
+                font-size: 32px;
+            }
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            .sub {
+                font-size: 14px;
+            }
+            .help-badge {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+            .tag-list {
+                gap: 10px;
+            }
+            .tag {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+            .input-box {
+                padding: 20px;
+            }
+            .desc-textarea {
+                padding: 14px;
+                font-size: 14px;
+                min-height: 120px;
+            }
+            .card {
+                padding: 20px;
+            }
+            .card p {
+                font-size: 14px;
+            }
+            .action-btn {
+                padding: 14px 12px;
+                font-size: 14px;
+            }
+            .section-title {
+                font-size: 16px;
+            }
+            .card-header h3 {
+                font-size: 16px;
+            }
+        }
+        
+        /* 小屏手机端 (0 - 480px) */
+        @media (max-width: 480px) {
+            .main-wrap {
+                padding: 0 8px;
+            }
+            .header {
+                padding: 16px 0;
+            }
+            .logo {
+                font-size: 28px;
+            }
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+            .sub {
+                font-size: 13px;
+            }
+            .help-badge {
+                padding: 4px 12px;
+                font-size: 11px;
+            }
+            .tag-list {
+                gap: 8px;
+            }
+            .tag {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            .hot-section {
+                margin-bottom: 16px;
+            }
+            .hot-title {
+                font-size: 14px;
+                margin-bottom: 12px;
+            }
+            .hot-list {
+                gap: 8px;
+            }
+            .hot-item {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            .input-box {
+                padding: 16px;
+            }
+            .label {
+                font-size: 14px;
+                margin-bottom: 12px;
+            }
+            .desc-textarea {
+                padding: 12px;
+                font-size: 13px;
+                min-height: 100px;
+            }
+            .card {
+                padding: 16px;
+                border-radius: 16px;
+            }
+            .card-header {
+                margin-bottom: 14px;
+            }
+            .card-header h3 {
+                font-size: 15px;
+            }
+            .card-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            .card p {
+                font-size: 13px;
+                line-height: 1.6;
+            }
+            .gen-btn {
+                padding: 14px 20px;
+                font-size: 14px;
+            }
+            .action-btn {
+                padding: 12px 10px;
+                font-size: 12px;
+                gap: 6px;
+            }
+            .action-btn span:first-child {
+                font-size: 14px;
+            }
+            .section-title {
+                font-size: 15px;
+                margin-bottom: 12px;
+            }
+            .strength-bar {
+                height: 10px;
+            }
+            .strength-score {
+                font-size: 24px;
+            }
+            .strength-label {
+                font-size: 12px;
+            }
+            .law-list {
+                gap: 12px;
+            }
+            .law-item {
+                padding: 12px;
+            }
+            .law-title {
+                font-size: 13px;
+            }
+            .law-desc {
+                font-size: 12px;
+            }
+            .fallacy-warning {
+                padding: 12px;
+                margin-top: 12px;
+            }
+            .fallacy-title {
+                font-size: 13px;
+            }
+            .fallacy-desc {
+                font-size: 12px;
+            }
+            .export-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .export-btn {
+                width: 100%;
+                padding: 12px;
+                font-size: 13px;
+            }
+            .tips {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 骨架屏 -->
+    <div class="skeleton-screen" id="skeletonScreen"></div>
+    
+    <div class="main-wrap">
+        <!-- 头部 -->
+        <div class="header">
+            <div class="header-bg"></div>
+            <div class="logo">
+                <span class="logo-icon">⚖️</span>
+                有理有据
+            </div>
+            <div class="sub">把委屈变成底气</div>
+            <div class="help-badge">
+                <span class="sparkle">✨</span>
+                已帮助 <strong id="helpNum">0</strong> 人找回底气
+            </div>
+        </div>
+
+        <!-- 场景选择 -->
+        <div class="scene-section">
+            <div class="section-title">
+                <span>🎯</span>
+                选择场景
+            </div>
+            <div class="tag-list" id="tagGroup">
+                <span class="tag" data-k="kd">📦 快递丢失</span>
+                <span class="tag" data-k="wm">🍱 外卖问题</span>
+                <span class="tag" data-k="tk">🛒 网购退货</span>
+                <span class="tag" data-k="zf">🏠 租房押金</span>
+                <span class="tag" data-k="js">🏋️ 健身房跑路</span>
+                <span class="tag" data-k="sj">📱 手机维修</span>
+                <span class="tag" data-k="ly">✈️ 旅游纠纷</span>
+                <span class="tag" data-k="jy">📚 教育退费</span>
+                <span class="tag" data-k="yx">💊 医疗纠纷</span>
+                <span class="tag" data-k="dx">📱 电信扣费</span>
+                <span class="tag" data-k="qt">📋 其他</span>
+            </div>
+        </div>
+
+        <!-- 热门场景 -->
+        <div class="hot-section">
+            <div class="hot-title">🔥 大家都在问</div>
+            <div class="hot-list" id="hotList"></div>
+        </div>
+
+        <!-- 输入卡片 -->
+        <div class="input-box" id="inputBox">
+            <div class="label">✍️ 遇到了什么烦心事？</div>
+            <textarea class="desc-textarea" id="descInput" placeholder="用你自己的话说，发生了什么？&#10;&#10;比如：快递显示签收但我没收到，快递员说放门口了，门口根本没有。"></textarea>
+            
+            <!-- 逻辑谬误检测提示 -->
+            <div class="fallacy-warning" id="fallacyWarning">
+                <div class="fallacy-header">
+                    <span class="fallacy-icon">⚠️</span>
+                    <span class="fallacy-title" id="fallacyTitle">检测到逻辑谬误</span>
+                </div>
+                <div class="fallacy-desc" id="fallacyDesc"></div>
+            </div>
+            
+            <div class="tips">
+                <span>💡</span>
+                描述越详细，生成的话术越精准
+            </div>
+            <button class="gen-btn" id="genBtn">
+                <span class="magic">✨</span>
+                帮我生成话术
+            </button>
+        </div>
+
+        <!-- 加载动画 -->
+        <div class="loading-box" id="loadingBox">
+            <div class="loading-animation">
+                <div class="loading-ring"></div>
+                <div class="loading-ring"></div>
+                <div class="loading-ring"></div>
+            </div>
+            <div class="loading-text">正在帮你理清思路...</div>
+        </div>
+
+        <!-- 结果区域 -->
+        <div class="result-area" id="resultArea">
+            <!-- 论证强度评分 -->
+            <div class="card strength-card">
+                <div class="card-header">
+                    <div class="card-icon">💪</div>
+                    <h3>论证强度评分</h3>
+                </div>
+                <div class="strength-bar">
+                    <div class="strength-fill" id="strengthFill"></div>
+                </div>
+                <div class="strength-score" id="strengthScore">0</div>
+                <div class="strength-label" id="strengthLabel">完善证据可以提升评分</div>
+            </div>
+
+            <!-- 证据清单 -->
+            <div class="evidence-card">
+                <div class="card-header">
+                    <div class="card-icon">📋</div>
+                    <h3>准备好这些证据</h3>
+                </div>
+                <div class="evidence-list" id="evidenceList"></div>
+            </div>
+
+            <!-- 卡片容器（用于生成分享图片） -->
+            <div id="shareCardContainer">
+                <!-- 占理的地方 -->
+                <div class="card card-reason">
+                    <div class="card-header">
+                        <div class="card-icon">📍</div>
+                        <h3>你占理的地方</h3>
+                    </div>
+                    <p id="reasonText"></p>
+                </div>
+
+                <!-- 相关法律条款 -->
+                <div class="card law-card">
+                    <div class="card-header">
+                        <div class="card-icon">📜</div>
+                        <h3>相关法律条款</h3>
+                    </div>
+                    <div class="law-list" id="lawList"></div>
+                </div>
+
+                <!-- 可以这样说 -->
+                <div class="card card-script">
+                    <div class="card-header">
+                        <div class="card-icon">💬</div>
+                        <h3>你可以这样说</h3>
+                    </div>
+                    <p id="scriptText"></p>
+                    <button class="copy-btn" id="copyBtn" onclick="cp()">📋 复制这段话</button>
+                </div>
+
+                <!-- 如果对方推诿 -->
+                <div class="card card-rebuttal">
+                    <div class="card-header">
+                        <div class="card-icon">🛡️</div>
+                        <h3>如果对方推诿</h3>
+                    </div>
+                    <p id="rebuttalText"></p>
+                </div>
+            </div>
+
+            <!-- 快捷操作 -->
+            <div class="action-row">
+                <button class="action-btn action-btn-call" id="callBtn">
+                    <span>📞</span>
+                    拨打投诉电话
+                </button>
+                <button class="action-btn action-btn-share" id="shareBtn">
+                    <span>📤</span>
+                    分享给朋友
+                </button>
+                <button class="action-btn action-btn-image" id="shareImageBtn">
+                    <span>🖼️</span>
+                    生成分享图片
+                </button>
+            </div>
+
+            <!-- 导出操作 -->
+            <div class="export-row">
+                <button class="export-btn" id="exportBtn">
+                    <span>📄</span>
+                    导出报告
+                </button>
+                <button class="export-btn" id="loadSampleBtn">
+                    <span>📋</span>
+                    加载示例
+                </button>
+            </div>
+
+            <!-- 反馈 -->
+            <div class="feedback-row">
+                <span>这话术帮到你了吗？</span>
+                <button class="feedback-btn" onclick="thx()">👍</button>
+                <button class="feedback-btn" onclick="nohelp()">👎</button>
+            </div>
+
+            <!-- 再试一次 -->
+            <button class="retry-btn" onclick="resetAll()">
+                <span>🔄</span>
+                再试一次
+            </button>
+        </div>
+
+        <!-- 历史记录 -->
+        <div class="history-section">
+            <div class="history-title">
+                <h3>
+                    <span>📜</span>
+                    历史记录
+                </h3>
+                <span class="clear-history" id="clearHistory">清空</span>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="history-empty">暂无历史记录</div>
+            </div>
+        </div>
+
+        <!-- 底部提示 -->
+        <div class="footer-note">
+            我们不教人吵架，只教人说清道理<br>
+            仅供参考，不构成法律建议
+        </div>
+        
+        <!-- 反馈链接 -->
+        <div class="feedback-link" id="feedbackLink">
+            遇到问题？话术不准确？<span class="link-text">点我反馈</span>
+        </div>
+    </div>
+
+    <!-- 弹窗 -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <div class="modal-icon" id="modalIcon">🎉</div>
+            <h3 id="modalTitle">提示</h3>
+            <p id="modalText">内容</p>
+            <button class="modal-btn" onclick="closeModal()">确定</button>
+        </div>
+    </div>
+
+    <!-- 反馈弹窗 -->
+    <div class="modal-overlay" id="feedbackModal">
+        <div class="modal feedback-modal">
+            <div class="modal-icon">💬</div>
+            <h3>反馈意见</h3>
+            <textarea class="feedback-textarea" id="feedbackTextarea" placeholder="请描述你遇到的问题或建议..."></textarea>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-cancel" id="feedbackCancelBtn">取消</button>
+                <button class="modal-btn modal-btn-submit" id="feedbackSubmitBtn">提交反馈</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 等待DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // ---- 话术数据 ----
+        var db = {
+            kd: {
+                reason: "根据<strong>《快递暂行条例》</strong>第二十五条，经营快递业务的企业应当将快件投递到约定的收件地址、收件人或者收件人指定的代收人，并告知收件人或者代收人当面验收。快递员没经过你同意就放门口，属于未履行送达义务，丢了是快递公司的责任，保不保价都该赔偿。",
+                script: "您好，我快递单号<strong>XX</strong>显示签收，但我本人没收到，也没同意放门口。这是你们没尽到送达义务，麻烦今天内给我赔偿方案，不然我只能走12305投诉了。",
+                rebut: "要是对方说“没保价最多赔运费”\n你就说：“丢件是服务失误不是意外，得按实际损失赔偿。我订单金额<strong>XX元</strong>，支付凭证我都有。不处理我现在就打12305。”",
+                evidence: ["快递单号", "签收截图", "聊天记录", "价值凭证"],
+                hotline: "12305",
+                laws: [
+                    { title: "《快递暂行条例》第二十五条", desc: "经营快递业务的企业应当将快件投递到约定的收件地址、收件人或者收件人指定的代收人，并告知收件人或者代收人当面验收。" },
+                    { title: "《民法典》第五百七十七条", desc: "当事人一方不履行合同义务或者履行合同义务不符合约定的，应当承担继续履行、采取补救措施或者赔偿损失等违约责任。" }
+                ],
+                strength: 85
+            },
+            wm: {
+                reason: "订单截图就是最直接的证据。外卖送错餐、超时送达都是商家或平台没按约定履行合同，你有权要求退款或重新配送。所谓的“已出餐不能退”是霸王条款，不受法律支持。",
+                script: "你好，我订单号是<strong>XX</strong>，结果送来的是<strong>XX</strong>，和我点的不一样。截图和照片我都有，麻烦帮我退款或者重新做一份，不然我直接找平台客服介入了。",
+                rebut: "商家说“出餐了不能退”\n回：“餐不对是你们的责任，不能退我就让平台客服来看证据，按平台规则处理。”",
+                evidence: ["订单截图", "送达照片", "聊天记录"],
+                hotline: "12315",
+                laws: [
+                    { title: "《消费者权益保护法》第二十六条", desc: "经营者不得以格式条款、通知、声明、店堂告示等方式，作出排除或者限制消费者权利、减轻或者免除经营者责任、加重消费者责任等对消费者不公平、不合理的规定。" },
+                    { title: "《电子商务法》第四十九条", desc: "电子商务经营者发布的商品或者服务信息符合要约条件的，用户选择该商品或者服务并提交订单成功，合同成立。" }
+                ],
+                strength: 80
+            },
+            tk: {
+                reason: "根据<strong>《消费者权益保护法》第二十五条</strong>，网购商品除特殊商品外，享有七天无理由退货权利。只要商品完好，拆包装检查不算使用，卖家拒绝退货是违法的。",
+                script: "亲，我要行使七天无理由退货权利，商品我没用过，包装完好。请提供退货地址，方便我寄回。要是拒绝的话我就找平台介入了。",
+                rebut: "对方说“拆了包装不能退”\n回：“只拆包装验货没实际使用，完全符合七天无理由退货规定，不然我让平台客服来判定。”",
+                evidence: ["订单截图", "商品照片", "聊天记录"],
+                hotline: "12315",
+                laws: [
+                    { title: "《消费者权益保护法》第二十五条", desc: "经营者采用网络、电视、电话、邮购等方式销售商品，消费者有权自收到商品之日起七日内退货，且无需说明理由。" },
+                    { title: "《网络交易监督管理办法》第十六条", desc: "网络交易经营者不得以商品已拆封为由拒绝退货，但根据商品性质不宜退货的除外。" }
+                ],
+                strength: 90
+            },
+            zf: {
+                reason: "根据<strong>《民法典》第七百一十四条</strong>，租期到了你没违约，押金就该全额退还。正常居住造成的磨损属于自然损耗，不算损坏，房东扣钱必须拿出发票和证据。",
+                script: "房东你好，我房子到期了，已经收拾干净并拍了照片。请3天内把押金退给我。要是有损坏想扣钱，请提供维修发票和入住时的对比图，不然我就走住建委投诉和12345了。",
+                rebut: "房东说“多少得扣点”\n回：“要扣钱拿依据出来，没发票我就投诉到12345，不行还能走小额诉讼。”",
+                evidence: ["租赁合同", "房屋照片", "聊天记录", "转账记录"],
+                hotline: "12345",
+                laws: [
+                    { title: "《民法典》第七百一十四条", desc: "承租人应当妥善保管租赁物，因保管不善造成租赁物毁损、灭失的，应当承担赔偿责任。正常损耗除外。" },
+                    { title: "《商品房屋租赁管理办法》第七条", desc: "房屋租赁当事人应当依法订立租赁合同。合同内容应当包含押金条款及退还方式。" }
+                ],
+                strength: 85
+            },
+            js: {
+                reason: "根据预付式消费相关规定，商家关门无法提供服务，必须退还剩余余额。没开卡的全额退，开了卡的按次扣除已使用次数。所谓“概不退费”是霸王条款，法律不认可。",
+                script: "你好，我在你们这办的卡还有<strong>XX次</strong>没用，店关了没法继续消费。请7天内退我<strong>XX元</strong>，不然我就找12315投诉了，我也会联合其他会员一起维权。",
+                rebut: "对方说“规定不能退”\n回：“这种格式条款法律不认，我现在就向市场监管局举报。”",
+                evidence: ["会员卡", "缴费凭证", "商家通知", "聊天记录"],
+                hotline: "12315",
+                laws: [
+                    { title: "《消费者权益保护法》第五十三条", desc: "经营者以预收款方式提供商品或者服务的，应当按照约定提供。未按照约定提供的，应当按照消费者的要求履行约定或者退回预付款。" },
+                    { title: "《单用途商业预付卡管理办法》第二十一条", desc: "发卡企业或售卡企业应依单用途卡章程或协议约定，提供退卡服务。" }
+                ],
+                strength: 88
+            },
+            sj: {
+                reason: "根据<strong>《移动电话机商品修理更换退货责任规定》</strong>，手机在三包期内出现性能故障，7天可退、15天可换、一年内免费修。商家拖延或拒绝售后是违法的。",
+                script: "你好，我这部手机买了<strong>XX天</strong>，现在出现<strong>XX问题</strong>，符合三包规定。请按规定给我退货或换货，不然我就找市场监管局投诉了。",
+                rebut: "商家说“人为损坏不保修”\n回：“这是质量问题不是人为损坏，你们要是不认可，我可以去第三方检测，费用你们承担。”",
+                evidence: ["购买凭证", "保修卡", "故障照片", "检测报告"],
+                hotline: "12315",
+                laws: [
+                    { title: "《移动电话机商品修理更换退货责任规定》第五条", desc: "销售者应当承担三包责任，不得故意拖延或无理拒绝消费者的合理要求。" },
+                    { title: "《产品质量法》第四十条", desc: "售出的产品有下列情形之一的，销售者应当负责修理、更换、退货；给购买产品的消费者造成损失的，销售者应当赔偿损失。" }
+                ],
+                strength: 92
+            },
+            ly: {
+                reason: "根据<strong>《旅游法》</strong>，旅行社擅自变更行程、降低服务标准，应当退还相应费用并赔偿损失。行程取消的，组团社应当退还全部费用。",
+                script: "你好，我报的<strong>XX行程</strong>，你们擅自取消了景点还换了酒店。请按合同退还差价并赔偿违约金，不然我就找文旅局投诉了。",
+                rebut: "旅行社说“不可抗力”\n回：“请提供相关证明，不是所有情况都算不可抗力，不合理的话我会维权到底。”",
+                evidence: ["旅游合同", "行程单", "聊天记录", "照片视频"],
+                hotline: "12345",
+                laws: [
+                    { title: "《旅游法》第六十七条", desc: "因不可抗力或者旅行社、履行辅助人已尽合理注意义务仍不能避免的事件，影响旅游行程的，按照下列情形处理：合同不能继续履行的，旅行社和旅游者均可以解除合同。" },
+                    { title: "《旅游法》第七十条", desc: "旅行社不履行包价旅游合同义务或者履行合同义务不符合约定的，应当依法承担继续履行、采取补救措施或者赔偿损失等违约责任。" }
+                ],
+                strength: 82
+            },
+            jy: {
+                reason: "根据校外培训相关规定，培训机构未按约定提供培训服务，应当退还剩余费用。“概不退款”的格式条款无效。",
+                script: "你好，我在你们这报的<strong>XX课程</strong>还有<strong>XX节课</strong>没上，现在机构停课了。请7天内退还剩余费用<strong>XX元</strong>，不然我就找教育局和12315投诉了。",
+                rebut: "机构说“合同写了不能退”\n回：“这种格式条款排除了我的主要权利，法律上是无效的，我会继续维权。”",
+                evidence: ["培训合同", "缴费凭证", "课程记录", "停课通知"],
+                hotline: "12315",
+                laws: [
+                    { title: "《校外培训机构财务管理暂行办法》第二十三条", desc: "校外培训机构收取的培训费应当主要用于教育教学活动、改善办学条件和保障教职工待遇。" },
+                    { title: "《民法典》第四百九十七条", desc: "提供格式条款一方不合理地免除或者减轻其责任、加重对方责任、限制对方主要权利的，该格式条款无效。" }
+                ],
+                strength: 86
+            },
+            yx: {
+                reason: "医疗服务存在问题时，患者有权要求医院提供病历、检查报告等资料，并可以申请医疗事故鉴定。医院拒绝提供或隐瞒信息的，应当承担相应责任。",
+                script: "你好，我在贵院就诊后出现了<strong>XX问题</strong>。请提供我的完整病历和检查报告，我需要了解具体情况。如果你们拒绝提供，我将向卫健委投诉。",
+                rebut: "医院说“病历不能给你”\n回：“根据《医疗纠纷预防和处理条例》，患者有权查阅、复制病历资料。请立即提供，否则我将依法维权。”",
+                evidence: ["病历", "检查报告", "缴费凭证", "沟通记录"],
+                hotline: "12320",
+                laws: [
+                    { title: "《医疗纠纷预防和处理条例》第十六条", desc: "患者有权查阅、复制其门诊病历、住院志、体温单、医嘱单、化验单（检验报告）、医学影像检查资料等病历资料。" },
+                    { title: "《民法典》第一千二百一十八条", desc: "患者在诊疗活动中受到损害，医疗机构或者其医务人员有过错的，由医疗机构承担赔偿责任。" }
+                ],
+                strength: 78
+            },
+            dx: {
+                reason: "根据<strong>《电信条例》</strong>，电信业务经营者应当按照国家有关规定，建立健全服务质量管理制度，并公布服务质量承诺。未经用户同意擅自扣费属于违法行为。",
+                script: "你好，我发现话费账单中有<strong>XX元</strong>的不明扣费。请提供扣费明细和依据，否则我将向工信部投诉并要求双倍返还。",
+                rebut: "运营商说“是你自己开通的”\n回：“我从未开通此业务，请提供我同意开通的证明，否则我将投诉到12300。”",
+                evidence: ["话费账单", "扣费短信", "客服沟通记录"],
+                hotline: "12300",
+                laws: [
+                    { title: "《电信条例》第三十条", desc: "电信业务经营者应当按照国家规定的电信服务标准向电信用户提供服务。" },
+                    { title: "《消费者权益保护法》第八条", desc: "消费者享有知悉其购买、使用的商品或者接受的服务的真实情况的权利。" }
+                ],
+                strength: 84
+            },
+            qt: {
+                reason: "消费纠纷记住三个要点：<strong>留证据、讲法律、敢维权</strong>。大部分情况都有法规保护你，别怕对方态度凶。",
+                script: "你好，我遇到个问题：<strong>XX</strong>。证据我这里都有，麻烦给个合理的处理方案，不然只能找12315投诉了。",
+                rebut: "对方说“这是公司规定”\n回：“请拿规定的正式文件给我看，没依据的话我就找上级或监管部门反映。”",
+                evidence: ["相关凭证", "聊天记录", "照片视频"],
+                hotline: "12315",
+                laws: [
+                    { title: "《消费者权益保护法》第三十九条", desc: "消费者和经营者发生消费者权益争议的，可以通过与经营者协商和解、请求消费者协会或者依法成立的其他调解组织调解等途径解决。" },
+                    { title: "《民法典》第一千一百六十五条", desc: "行为人因过错侵害他人民事权益造成损害的，应当承担侵权责任。" }
+                ],
+                strength: 75
+            }
+        };
+
+        // 当前选中的key
+        var curK = null;
+        // 当前生成的话术
+        var curTxt = '';
+        var curData = null;
+
+        // DOM元素
+        var tags = document.querySelectorAll('#tagGroup .tag');
+        var helpNumEl = document.getElementById('helpNum');
+        var inputBox = document.getElementById('inputBox');
+        var loadingBox = document.getElementById('loadingBox');
+        var resultArea = document.getElementById('resultArea');
+        var historyList = document.getElementById('historyList');
+        var clearHistoryBtn = document.getElementById('clearHistory');
+        var callBtn = document.getElementById('callBtn');
+        var shareBtn = document.getElementById('shareBtn');
+        var exportBtn = document.getElementById('exportBtn');
+        var loadSampleBtn = document.getElementById('loadSampleBtn');
+        var descInput = document.getElementById('descInput');
+        var fallacyWarning = document.getElementById('fallacyWarning');
+        var fallacyTitle = document.getElementById('fallacyTitle');
+        var fallacyDesc = document.getElementById('fallacyDesc');
+
+        // 读取帮助数
+        var storedHc = localStorage.getItem('hc');
+        var hc = storedHc ? parseInt(storedHc) : 0;
+        helpNumEl.textContent = hc;
+
+        // 读取历史记录
+        var history = JSON.parse(localStorage.getItem('history') || '[]');
+        renderHistory();
+
+        // ---- 逻辑谬误检测 ----
+        var fallacyPatterns = {
+            absolutism: {
+                name: '绝对化',
+                description: '使用绝对化词汇，如"所有"、"永远"、"必定"等，容易导致片面结论',
+                keywords: ['所有', '全部', '任何', '总是', '永远', '必定', '必然', '绝对', '唯一', '只有', '必须']
+            },
+            slipperySlope: {
+                name: '滑坡谬误',
+                description: '不合理地使用连串的因果关系，夸大每个环节的因果强度',
+                keywords: ['如果...就会...', '一旦...就...', '必将', '迟早', '后果不堪设想']
+            },
+            hastyGeneralization: {
+                name: '以偏概全',
+                description: '根据个别案例得出普遍性结论，样本不足或有偏差',
+                keywords: ['都', '全部', '一概而论', '从来都是', '每次都']
+            },
+            appealToPopularity: {
+                name: '诉诸大众',
+                description: '认为多数人认同的就是正确的，忽略事实和逻辑',
+                keywords: ['大家都', '所有人都', '大家都说', '众所周知', '公认']
+            }
+        };
+
+        function detectFallacy(text) {
+            for (var key in fallacyPatterns) {
+                var pattern = fallacyPatterns[key];
+                for (var i = 0; i < pattern.keywords.length; i++) {
+                    if (text.indexOf(pattern.keywords[i]) !== -1) {
+                        return {
+                            type: key,
+                            name: pattern.name,
+                            description: pattern.description,
+                            keyword: pattern.keywords[i]
+                        };
+                    }
+                }
+            }
+            return null;
+        }
+
+        // 输入框监听
+        descInput.addEventListener('input', function() {
+            var fallacy = detectFallacy(this.value);
+            if (fallacy) {
+                fallacyTitle.textContent = '检测到「' + fallacy.name + '」逻辑谬误';
+                fallacyDesc.innerHTML = fallacy.description + '。检测到关键词：<span class="fallacy-highlight">' + fallacy.keyword + '</span>';
+                fallacyWarning.classList.add('show');
+            } else {
+                fallacyWarning.classList.remove('show');
+            }
+        });
+
+        // 热门场景数据
+        var hotScenes = [
+            {
+                title: '快递丢件怎么办',
+                key: 'kd',
+                example: '我的快递显示已签收但我没收到，打电话给快递员他说放门口了，但门口什么都没有。单号是SF1234567890，里面是500元的电子产品。'
+            },
+            {
+                title: '房东不退押金',
+                key: 'zf',
+                example: '我租房到期了，押金3000元，房东说墙壁有划痕要扣钱，但我住进来的时候墙上就有划痕了。合同和转账记录都有。'
+            },
+            {
+                title: '外卖送错',
+                key: 'wm',
+                example: '我在美团点了份麻辣烫，结果送来的是炒饭，订单号是MT202312345678，商家说是骑手送错了，但我已经等了半小时。'
+            }
+        ];
+
+        // 渲染热门场景
+        function renderHotScenes() {
+            var hotList = document.getElementById('hotList');
+            hotList.innerHTML = hotScenes.map(function(scene) {
+                return '<div class="hot-item" data-key="' + scene.key + '" data-example="' + encodeURIComponent(scene.example) + '">' + scene.title + '</div>';
+            }).join('');
+
+            // 绑定点击事件
+            hotList.querySelectorAll('.hot-item').forEach(function(item) {
+                item.addEventListener('click', function() {
+                    var key = this.dataset.key;
+                    var example = decodeURIComponent(this.dataset.example);
+                    
+                    // 选中场景标签
+                    tags.forEach(function(t) {
+                        t.classList.remove('on');
+                        if (t.dataset.k === key) t.classList.add('on');
+                    });
+                    
+                    // 填入示例文字
+                    document.getElementById('descInput').value = example;
+                    
+                    // 滚动到输入框
+                    document.getElementById('inputBox').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // 聚焦输入框
+                    setTimeout(function() {
+                        document.getElementById('descInput').focus();
+                    }, 500);
+                });
+            });
+        }
+
+        // 初始化热门场景
+        renderHotScenes();
+
+        // 标签点击
+        tags.forEach(function(t) {
+            t.addEventListener('click', function() {
+                tags.forEach(function(tt) { tt.classList.remove('on'); });
+                this.classList.add('on');
+                curK = this.dataset.k;
+            });
+        });
+
+        // 更新帮助数
+        function updateHc() {
+            hc++;
+            helpNumEl.textContent = hc;
+            localStorage.setItem('hc', hc.toString());
+        }
+
+        // 保存历史记录
+        function saveHistory(item) {
+            history.unshift({
+                id: Date.now(),
+                key: item.key,
+                desc: item.desc,
+                time: new Date().toLocaleString('zh-CN')
+            });
+            if (history.length > 20) history.pop();
+            localStorage.setItem('history', JSON.stringify(history));
+            renderHistory();
+        }
+
+        // 渲染历史记录
+        function renderHistory() {
+            if (history.length === 0) {
+                historyList.innerHTML = '<div class="history-empty">暂无历史记录</div>';
+                historyList.classList.remove('show');
+                return;
+            }
+            
+            historyList.classList.add('show');
+            historyList.innerHTML = history.map(function(item) {
+                var iconMap = {
+                    kd: '📦', wm: '🍱', tk: '🛒', zf: '🏠', 
+                    js: '🏋️', sj: '📱', ly: '✈️', jy: '📚', yx: '💊', dx: '📱', qt: '📋'
+                };
+                return `
+                    <div class="history-item" onclick="loadHistory('${item.id}')">
+                        <div class="history-icon" style="background: rgba(224,122,58,0.1);">${iconMap[item.key] || '📋'}</div>
+                        <div class="history-content">
+                            <p>${item.desc || getSceneName(item.key)}</p>
+                            <span>${item.time}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 获取场景名称
+        function getSceneName(key) {
+            var names = {
+                kd: '快递丢失', wm: '外卖问题', tk: '网购退货', zf: '租房押金',
+                js: '健身房跑路', sj: '手机维修', ly: '旅游纠纷', jy: '教育退费',
+                yx: '医疗纠纷', dx: '电信扣费', qt: '其他问题'
+            };
+            return names[key] || '其他问题';
+        }
+
+        // 加载历史记录
+        function loadHistory(id) {
+            var item = history.find(function(h) { return h.id === parseInt(id); });
+            if (item) {
+                curK = item.key;
+                tags.forEach(function(t) {
+                    t.classList.remove('on');
+                    if (t.dataset.k === item.key) t.classList.add('on');
+                });
+                document.getElementById('descInput').value = item.desc || '';
+                doGen();
+            }
+        }
+
+        // 清空历史记录
+        clearHistoryBtn.addEventListener('click', function() {
+            if (confirm('确定要清空所有历史记录吗？')) {
+                history = [];
+                localStorage.removeItem('history');
+                renderHistory();
+            }
+        });
+
+        // ---- 生成话术 ----
+        function doGen() {
+            var desc = document.getElementById('descInput').value.trim();
+            
+            // 判断是否需要选择场景
+            if (!curK && !desc) {
+                showModal('提示', '先选个场景，或者简单描述一下遇到的问题吧~', '💡');
+                return;
+            }
+
+            var finalK = curK;
+            if (!finalK) {
+                if (desc.indexOf('快递') !== -1 || desc.indexOf('包裹') !== -1 || desc.indexOf('签收') !== -1) finalK = 'kd';
+                else if (desc.indexOf('外卖') !== -1 || desc.indexOf('送错') !== -1 || desc.indexOf('餐') !== -1) finalK = 'wm';
+                else if (desc.indexOf('退货') !== -1 || desc.indexOf('网购') !== -1 || desc.indexOf('七天') !== -1) finalK = 'tk';
+                else if (desc.indexOf('房东') !== -1 || desc.indexOf('押金') !== -1 || desc.indexOf('租房') !== -1) finalK = 'zf';
+                else if (desc.indexOf('健身房') !== -1 || desc.indexOf('跑路') !== -1 || desc.indexOf('办卡') !== -1) finalK = 'js';
+                else if (desc.indexOf('手机') !== -1 || desc.indexOf('维修') !== -1 || desc.indexOf('保修') !== -1) finalK = 'sj';
+                else if (desc.indexOf('旅游') !== -1 || desc.indexOf('行程') !== -1 || desc.indexOf('旅行社') !== -1) finalK = 'ly';
+                else if (desc.indexOf('教育') !== -1 || desc.indexOf('培训') !== -1 || desc.indexOf('退费') !== -1) finalK = 'jy';
+                else if (desc.indexOf('医院') !== -1 || desc.indexOf('医疗') !== -1 || desc.indexOf('病历') !== -1) finalK = 'yx';
+                else if (desc.indexOf('话费') !== -1 || desc.indexOf('扣费') !== -1 || desc.indexOf('电信') !== -1) finalK = 'dx';
+                else finalK = 'qt';
+            }
+
+            saveHistory({ key: finalK, desc: desc });
+
+            inputBox.style.display = 'none';
+            loadingBox.classList.add('show');
+            resultArea.classList.remove('show');
+
+            setTimeout(function() {
+                var data = db[finalK];
+                curData = data;
+                
+                // 根据用户输入动态调整话术
+                var dynamicScript = data.script;
+                
+                // 快递场景：检测顺丰
+                if (finalK === 'kd' && desc.indexOf('顺丰') !== -1) {
+                    dynamicScript = dynamicScript.replace('快递公司', '顺丰').replace('快递员', '顺丰快递员');
+                }
+                
+                // 外卖场景：检测美团、饿了么
+                if (finalK === 'wm') {
+                    if (desc.indexOf('美团') !== -1) {
+                        dynamicScript = dynamicScript.replace('平台', '美团平台').replace('商家', '美团商家');
+                    } else if (desc.indexOf('饿了么') !== -1) {
+                        dynamicScript = dynamicScript.replace('平台', '饿了么平台').replace('商家', '饿了么商家');
+                    }
+                }
+                
+                // 租房场景：检测贝壳、自如
+                if (finalK === 'zf') {
+                    if (desc.indexOf('贝壳') !== -1) {
+                        dynamicScript = dynamicScript.replace('房东', '贝壳平台').replace('押金', '贝壳押金');
+                    } else if (desc.indexOf('自如') !== -1) {
+                        dynamicScript = dynamicScript.replace('房东', '自如平台').replace('押金', '自如押金');
+                    }
+                }
+                
+                curTxt = dynamicScript.replace(/<strong>|<\/strong>/g, '');
+                
+                // 更新证据清单
+                document.getElementById('evidenceList').innerHTML = data.evidence.map(function(item) {
+                    return `<div class="evidence-item"><span class="check">✓</span>${item}</div>`;
+                }).join('');
+
+                // 更新法律条款
+                document.getElementById('lawList').innerHTML = data.laws.map(function(law) {
+                    return `
+                        <div class="law-item">
+                            <div class="law-item-title">${law.title}</div>
+                            <div class="law-item-desc">${law.desc}</div>
+                        </div>
+                    `;
+                }).join('');
+
+                // 更新内容
+                document.getElementById('reasonText').innerHTML = data.reason;
+                document.getElementById('scriptText').innerHTML = dynamicScript;
+                document.getElementById('rebuttalText').innerHTML = data.rebut;
+
+                // 更新论证强度
+                updateStrength(data.strength);
+
+                // 更新投诉电话
+                callBtn.setAttribute('data-hotline', data.hotline);
+                callBtn.innerHTML = `<span>📞</span>拨打 ${data.hotline}`;
+
+                // 显示结果
+                loadingBox.classList.remove('show');
+                resultArea.classList.add('show');
+                
+                setTimeout(function() {
+                    resultArea.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+
+                updateHc();
+            }, 1500);
+        }
+
+        // 更新论证强度
+        function updateStrength(score) {
+            var strengthFill = document.getElementById('strengthFill');
+            var strengthScore = document.getElementById('strengthScore');
+            var strengthLabel = document.getElementById('strengthLabel');
+            
+            strengthFill.style.width = '0%';
+            strengthScore.textContent = '0';
+            
+            setTimeout(function() {
+                strengthFill.style.width = score + '%';
+                strengthScore.textContent = score;
+                
+                var label = '';
+                if (score >= 90) label = '论证非常有力，胜诉概率很高';
+                else if (score >= 80) label = '论证比较有力，证据充分';
+                else if (score >= 70) label = '论证基本成立，可以尝试';
+                else label = '建议收集更多证据';
+                
+                strengthLabel.textContent = label;
+            }, 100);
+        }
+
+        // ---- 复制 ----
+        function cp() {
+            if (!curTxt) return;
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(curTxt).then(function() {
+                    showCpOk();
+                }).catch(function() {
+                    fallbackCopy();
+                });
+            } else {
+                fallbackCopy();
+            }
+        }
+
+        function showCpOk() {
+            var cb = document.getElementById('copyBtn');
+            cb.innerHTML = '✓ 已复制到剪贴板';
+            cb.classList.add('done');
+            
+            // 如果手机支持震动，反馈震动
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+            
+            setTimeout(function() {
+                cb.innerHTML = '📋 复制这段话';
+                cb.classList.remove('done');
+            }, 2000);
+        }
+
+        function fallbackCopy() {
+            var textarea = document.createElement('textarea');
+            textarea.value = curTxt;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showCpOk();
+            } catch (err) {
+                alert('复制失败，请手动复制');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // ---- 投诉电话 ----
+        callBtn.addEventListener('click', function() {
+            var hotline = this.getAttribute('data-hotline');
+            if (hotline) {
+                showModal('提示', `即将拨打投诉电话 ${hotline}`, '📞');
+            }
+        });
+
+        // ---- 分享 ----
+        shareBtn.addEventListener('click', function() {
+            var shareData = {
+                title: '有理有据 - 把委屈变成底气',
+                text: '遇到消费纠纷不知道怎么说？这个工具能帮你生成有理有据的话术！',
+                url: window.location.href
+            };
+            
+            if (navigator.share) {
+                navigator.share(shareData).catch(function() {
+                    fallbackShare();
+                });
+            } else {
+                fallbackShare();
+            }
+        });
+
+        function fallbackShare() {
+            var text = '遇到消费纠纷不知道怎么说？试试「有理有据」工具，帮你生成专业话术！\n' + window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(function() {
+                    showModal('提示', '分享链接已复制到剪贴板', '📤');
+                });
+            }
+        }
+
+        // ---- 生成分享图片 ----
+        var shareImageBtn = document.getElementById('shareImageBtn');
+        shareImageBtn.addEventListener('click', function() {
+            if (!curData) {
+                showModal('提示', '请先生成话术再生成分享图片', '🖼️');
+                return;
+            }
+            
+            showModal('提示', '正在生成图片，请稍候...', '🖼️');
+            
+            var container = document.getElementById('shareCardContainer');
+            
+            html2canvas(container, {
+                scale: 2,
+                backgroundColor: '#fff8f3',
+                useCORS: true,
+                logging: false,
+                onclone: function(clonedDoc) {
+                    // 可以在这里对克隆的DOM进行修改
+                }
+            }).then(function(canvas) {
+                closeModal();
+                
+                // 创建下载链接
+                var link = document.createElement('a');
+                link.download = '有理有据_维权话术_' + Date.now() + '.png';
+                link.href = canvas.toDataURL('image/png');
+                
+                // 创建预览弹窗
+                var previewModal = document.createElement('div');
+                previewModal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0,0,0,0.8);
+                    z-index: 1000;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 20px;
+                `;
+                
+                var img = document.createElement('img');
+                img.src = canvas.toDataURL('image/png');
+                img.style.maxWidth = '100%';
+                img.style.maxHeight = '70vh';
+                img.style.borderRadius = '12px';
+                img.style.boxShadow = '0 10px 40px rgba(0,0,0,0.3)';
+                
+                var btnContainer = document.createElement('div');
+                btnContainer.style.cssText = `
+                    display: flex;
+                    gap: 15px;
+                    margin-top: 20px;
+                `;
+                
+                var downloadBtn = document.createElement('button');
+                downloadBtn.textContent = '💾 保存图片';
+                downloadBtn.style.cssText = `
+                    padding: 12px 30px;
+                    background: linear-gradient(135deg, #e07a3a 0%, #c2692c 100%);
+                    color: white;
+                    border: none;
+                    border-radius: 30px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    box-shadow: 0 4px 15px rgba(224,122,58,0.4);
+                    transition: all 0.3s;
+                `;
+                downloadBtn.addEventListener('click', function() {
+                    link.click();
+                    previewModal.remove();
+                    showModal('成功', '图片已保存！', '🎉');
+                });
+                
+                var closeBtn = document.createElement('button');
+                closeBtn.textContent = '✕ 关闭';
+                closeBtn.style.cssText = `
+                    padding: 12px 30px;
+                    background: rgba(255,255,255,0.2);
+                    color: white;
+                    border: 1px solid rgba(255,255,255,0.3);
+                    border-radius: 30px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                `;
+                closeBtn.addEventListener('click', function() {
+                    previewModal.remove();
+                });
+                
+                btnContainer.appendChild(downloadBtn);
+                btnContainer.appendChild(closeBtn);
+                previewModal.appendChild(img);
+                previewModal.appendChild(btnContainer);
+                
+                document.body.appendChild(previewModal);
+                
+                // 点击背景关闭
+                previewModal.addEventListener('click', function(e) {
+                    if (e.target === previewModal) {
+                        previewModal.remove();
+                    }
+                });
+            }).catch(function(error) {
+                closeModal();
+                showModal('错误', '生成图片失败，请重试', '❌');
+                console.error('html2canvas error:', error);
+            });
+        });
+
+        // ---- 导出报告 ----
+        exportBtn.addEventListener('click', function() {
+            if (!curData) {
+                showModal('提示', '请先生成话术再导出', '📄');
+                return;
+            }
+            
+            var report = {
+                title: '有理有据 - 维权报告',
+                scene: getSceneName(curK),
+                description: document.getElementById('descInput').value || '未填写描述',
+                reason: document.getElementById('reasonText').innerHTML.replace(/<[^>]*>/g, ''),
+                script: curTxt,
+                rebuttal: document.getElementById('rebuttalText').innerHTML.replace(/<[^>]*>/g, ''),
+                evidence: curData.evidence,
+                laws: curData.laws,
+                strength: curData.strength,
+                hotline: curData.hotline,
+                exportTime: new Date().toISOString()
+            };
+            
+            var blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = '维权报告_' + new Date().getTime() + '.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showModal('成功', '报告已导出，点击下载保存', '🎉');
+        });
+
+        // ---- 加载示例 ----
+        loadSampleBtn.addEventListener('click', function() {
+            curK = 'kd';
+            tags.forEach(function(t) {
+                t.classList.remove('on');
+                if (t.dataset.k === 'kd') t.classList.add('on');
+            });
+            document.getElementById('descInput').value = '我的快递单号是SF1234567890，物流显示已签收但我本人并没有收到。联系快递员说放在门口了，但我家门口根本没有。包裹里是价值500元的日用品。';
+            doGen();
+        });
+
+        // ---- 反馈 ----
+        function thx() {
+            showModal('感谢', '很高兴能帮到你！继续加油，有理走遍天下！', '🎉');
+            updateHc();
+        }
+
+        function nohelp() {
+            showModal('抱歉', '很抱歉没帮到你，我们会继续改进！', '😔');
+        }
+
+        // ---- 重置 ----
+        function resetAll() {
+            inputBox.style.display = 'block';
+            loadingBox.classList.remove('show');
+            resultArea.classList.remove('show');
+            document.getElementById('descInput').value = '';
+            fallacyWarning.classList.remove('show');
+            tags.forEach(function(t) { t.classList.remove('on'); });
+            curK = null;
+            curTxt = '';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ---- 弹窗 ----
+        function showModal(title, text, icon) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalText').textContent = text;
+            document.getElementById('modalIcon').textContent = icon;
+            document.getElementById('modal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+        }
+
+        // 反馈弹窗功能
+        function openFeedbackModal() {
+            document.getElementById('feedbackModal').classList.add('show');
+        }
+
+        function closeFeedbackModal() {
+            document.getElementById('feedbackModal').classList.remove('show');
+            document.getElementById('feedbackTextarea').value = '';
+        }
+
+        function submitFeedback() {
+            var feedback = document.getElementById('feedbackTextarea').value.trim();
+            if (!feedback) {
+                showModal('提示', '请输入反馈内容', '💡');
+                return;
+            }
+
+            // 保存反馈到localStorage
+            var feedbacks = JSON.parse(localStorage.getItem('ylyj_feedbacks') || '[]');
+            feedbacks.push({
+                id: Date.now(),
+                content: feedback,
+                timestamp: new Date().toISOString(),
+                version: '1.0'
+            });
+            localStorage.setItem('ylyj_feedbacks', JSON.stringify(feedbacks));
+
+            closeFeedbackModal();
+            showModal('感谢', '反馈已提交，感谢你的意见！', '🎉');
+        }
+
+        // 绑定反馈链接点击事件
+        document.getElementById('feedbackLink').addEventListener('click', openFeedbackModal);
+
+        // 绑定反馈弹窗按钮事件
+        document.getElementById('feedbackCancelBtn').addEventListener('click', closeFeedbackModal);
+        document.getElementById('feedbackSubmitBtn').addEventListener('click', submitFeedback);
+
+        // 点击反馈弹窗外部关闭
+        document.getElementById('feedbackModal').addEventListener('click', function(e) {
+            if (e.target === this) closeFeedbackModal();
+        });
+
+        // 点击弹窗外部关闭
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // 生成按钮点击
+        document.getElementById('genBtn').addEventListener('click', doGen);
+
+        // 回车键触发生成
+        document.getElementById('descInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                doGen();
+            }
+        });
+
+        // 注册 Service Worker（离线缓存）
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('sw.js')
+                    .then(function(registration) {
+                        console.log('SW registered:', registration.scope);
+                    })
+                    .catch(function(error) {
+                        // 注册失败，静默处理
+                        console.log('SW registration failed:', error);
+                    });
+            });
+        }
+        });
+    </script>
+</body>
+</html>
