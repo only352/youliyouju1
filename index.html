@@ -15,7 +15,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             z-index: 9999;
             display: flex;
             align-items: center;
@@ -23,18 +23,14 @@
             animation: skeleton-fadeout 0.5s ease-out 0.5s forwards;
         }
         .skeleton-screen::before {
-            content: '';
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #ddd 0%, #ccc 50%, #ddd 100%);
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            content: '⚖️';
+            font-size: 64px;
             animation: skeleton-pulse 1.5s ease-in-out infinite;
         }
         
         @keyframes skeleton-pulse {
             0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.02); }
+            50% { opacity: 1; transform: scale(1.05); }
         }
         
         @keyframes skeleton-fadeout {
@@ -43,33 +39,58 @@
         }
         
         :root {
-            --primary: #e07a3a;
-            --primary-light: #fff5ed;
-            --primary-dark: #c2692c;
-            --primary-glow: rgba(224, 122, 58, 0.5);
-            --blue: #4a8bc0;
-            --blue-light: #f3f8fb;
-            --blue-glow: rgba(74, 139, 192, 0.3);
-            --green: #5cb85c;
-            --yellow: #f0ad4e;
-            --red: #d9534f;
-            --gray: #9e9e9e;
-            --gray-light: #f9f9f9;
-            --gray-border: rgba(0, 0, 0, 0.06);
-            --bg-gradient: linear-gradient(135deg, #fff8f3 0%, #fef9f6 30%, #f5f9fc 60%, #f0f5fa 100%);
-            --text: #1e2f4a;
-            --text-light: #7a7a7a;
-            --text-muted: #a0a0a0;
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --primary-glow: rgba(99, 102, 241, 0.4);
+            --secondary: #ec4899;
+            --secondary-light: #f472b6;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 30%, #0f172a 70%, #1e293b 100%);
+            --card-bg: rgba(30, 41, 59, 0.8);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text: #f1f5f9;
+            --text-light: #94a3b8;
+            --text-muted: #64748b;
+            --glass: rgba(30, 41, 59, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.3);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+        }
+        
+        /* 浅色主题 */
+        body.light-theme {
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 30%, #f8fafc 70%, #e2e8f0 100%);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-border: rgba(0, 0, 0, 0.08);
+            --text: #1e293b;
+            --text-light: #64748b;
+            --text-muted: #94a3b8;
             --glass: rgba(255, 255, 255, 0.85);
             --glass-border: rgba(255, 255, 255, 0.5);
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
-            --shadow-glow: 0 8px 25px rgba(224, 122, 58, 0.3);
-            --radius-sm: 12px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
         body {
             background: var(--bg-gradient);
@@ -77,52 +98,612 @@
             font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
             min-height: 100vh;
             padding-bottom: 120px;
-            backdrop-filter: blur(20px);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
         .main-wrap {
-            max-width: 480px;
+            max-width: 800px;
             width: 100%;
             margin: 0 auto;
-            padding: 0 16px;
+            padding: 0 24px;
             position: relative;
         }
         
         /* 背景装饰 */
         .bg-decoration {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
-        }
-        .bg-decoration::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            left: -100px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float-slow 8s ease-in-out infinite;
-            opacity: 0.6;
-        }
-        .bg-decoration::after {
-            content: '';
-            position: absolute;
-            bottom: -150px;
-            right: -150px;
+            top: -200px;
+            left: -200px;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, var(--blue-glow) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
             border-radius: 50%;
-            animation: float-slow 10s ease-in-out infinite reverse;
-            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .bg-decoration-2 {
+            position: fixed;
+            bottom: -200px;
+            right: -200px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* 头部 */
+        .header {
+            text-align: center;
+            padding: 60px 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+        .theme-icon {
+            font-size: 22px;
+        }
+        .header-bg {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(74, 139, 192, 0.08) 50%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+        .logo {
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 8px;
+            position: relative;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            transition: transform 0.3s ease;
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+        }
+        .logo:hover {
+            transform: scale(1.02);
+        }
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.4);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+        .logo:hover .logo-icon {
+            transform: scale(1.1);
+        }
+        .sub {
+            color: var(--text-light);
+            font-size: 16px;
+            margin-top: 16px;
+            position: relative;
+            z-index: 2;
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+        .help-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            color: var(--primary-light);
+            font-size: 14px;
+            padding: 10px 24px;
+            border-radius: 30px;
+            margin-top: 24px;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        .help-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.25);
+        }
+        .help-badge strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .sparkle {
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* 功能导航 */
+        .feature-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 28px;
+            padding: 6px;
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            position: relative;
+            z-index: 1;
+        }
+        .feature-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 14px 12px;
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .feature-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary-light);
+        }
+        .feature-btn.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+        .feature-icon {
+            font-size: 24px;
+        }
+
+        /* 功能模块通用样式 */
+        .feature-section {
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 法律知识库 */
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .knowledge-card {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .knowledge-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2);
+        }
+        .knowledge-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+        .knowledge-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        .knowledge-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .knowledge-detail {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 20px;
+        }
+        .knowledge-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .back-btn {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--primary-light);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+        }
+        .knowledge-detail-header h3 {
+            font-size: 18px;
+            color: var(--text);
+            font-weight: 600;
+        }
+        .law-article {
+            background: rgba(99, 102, 241, 0.08);
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 16px;
+        }
+        .law-article-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+        .law-article-content {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.7;
+            opacity: 0.85;
+        }
+
+        /* 法律赔偿计算器 */
+        .calculator-card {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .calc-type-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .calc-type-btn {
+            flex: 1;
+            min-width: 80px;
+            padding: 12px 16px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--text-light);
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .calc-type-btn:hover {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary-light);
+        }
+        .calc-type-btn.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-color: var(--primary);
+        }
+        .calc-panel {
+            animation: fadeIn 0.3s ease;
+        }
+        .calc-input-group {
+            margin-bottom: 20px;
+        }
+        .calc-input-group label {
+            display: block;
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .calc-input-group input, .calc-input-group select {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        .calc-input-group input:focus, .calc-input-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        .calc-result {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .result-label {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .result-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-light);
+        }
+        .calc-info {
+            background: rgba(99, 102, 241, 0.08);
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .calc-info p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        .calc-result-box {
+            background: rgba(15, 23, 42, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .calc-result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .calc-result-item:last-child {
+            border-bottom: none;
+        }
+        .calc-result-item span {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .calc-result-item strong {
+            font-size: 18px;
+            color: var(--text);
+        }
+        .calc-result-item.total {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%);
+            margin: 12px -16px -16px;
+            padding: 16px;
+            border-radius: 0 0 12px 12px;
+        }
+        .calc-result-item.total span {
+            font-weight: 600;
+            color: var(--text);
+        }
+        .calc-result-item.total strong {
+            font-size: 22px;
+            color: var(--primary-light);
+        }
+        .calc-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .calc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        /* 话术模板收藏 */
+        .add-template-btn {
+            margin-left: auto;
+            padding: 8px 16px;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: var(--primary-light);
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .add-template-btn:hover {
+            background: rgba(99, 102, 241, 0.25);
+        }
+        .template-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .template-empty {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .template-item {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        .template-item:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+        .template-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .template-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .template-scene {
+            font-size: 12px;
+            color: var(--primary-light);
+            background: rgba(99, 102, 241, 0.1);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        .template-content {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        .template-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .template-action-btn {
+            flex: 1;
+            padding: 10px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--primary-light);
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .template-action-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+        }
+        .template-action-btn.delete {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+        .template-action-btn.delete:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+        .template-form {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 20px;
+        }
+        .template-form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .template-form-header h4 {
+            font-size: 16px;
+            color: var(--text);
+        }
+        .close-form-btn {
+            width: 32px;
+            height: 32px;
+            background: rgba(239, 68, 68, 0.1);
+            border: none;
+            color: var(--danger);
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .close-form-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        .save-template-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .save-template-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        /* 场景选择 */
+        .scene-section {
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
         }
         
         /* 动画 */
@@ -139,8 +720,8 @@
             50% { transform: translateX(-50%) scale(1.05); opacity: 0.8; }
         }
         @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 8px 25px rgba(224, 122, 58, 0.4); }
-            50% { box-shadow: 0 12px 40px rgba(224, 122, 58, 0.6); }
+            0%, 100% { box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4); }
+            50% { box-shadow: 0 12px 40px rgba(99, 102, 241, 0.6); }
         }
         @keyframes shimmer {
             0% { background-position: -200% center; }
@@ -159,100 +740,6 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* 头部 */
-        .header {
-            text-align: center;
-            padding: 48px 0 32px;
-            position: relative;
-            z-index: 1;
-        }
-        .header-bg {
-            position: absolute;
-            top: -80px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 360px;
-            height: 360px;
-            background: radial-gradient(circle, rgba(224,122,58,0.2) 0%, rgba(74,139,192,0.08) 50%, transparent 70%);
-            border-radius: 50%;
-            animation: pulse 4s ease-in-out infinite;
-        }
-        .logo {
-            font-size: 44px;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: 6px;
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            transition: transform 0.3s ease;
-        }
-        .logo:hover {
-            transform: scale(1.02);
-        }
-        .logo-icon {
-            width: 52px;
-            height: 52px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            box-shadow: 0 10px 30px rgba(224,122,58,0.4);
-            animation: float 3s ease-in-out infinite, pulse-glow 2s ease-in-out infinite;
-            transition: transform 0.3s ease;
-        }
-        .logo:hover .logo-icon {
-            transform: scale(1.1);
-        }
-        .sub {
-            color: var(--text-light);
-            font-size: 16px;
-            margin-top: 12px;
-            position: relative;
-            z-index: 2;
-            font-weight: 400;
-            letter-spacing: 2px;
-        }
-        .help-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--glass);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            color: var(--primary-dark);
-            font-size: 14px;
-            padding: 10px 24px;
-            border-radius: 30px;
-            margin-top: 24px;
-            position: relative;
-            z-index: 2;
-            animation: pulse 3s ease-in-out infinite;
-            box-shadow: 0 6px 20px rgba(224,122,58,0.18);
-            transition: all 0.3s ease;
-        }
-        .help-badge:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(224,122,58,0.25);
-        }
-        .help-badge strong { 
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--primary);
-        }
-        .help-badge .sparkle {
-            animation: sparkle 1.5s ease-in-out infinite;
-        }
-        @keyframes sparkle {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.2); }
-        }
-
         /* 场景选择 */
         .scene-section {
             margin-bottom: 28px;
@@ -268,7 +755,7 @@
         .hot-title {
             font-size: 15px;
             font-weight: 600;
-            color: var(--text);
+            color: var(--text-light);
             margin-bottom: 14px;
             display: flex;
             align-items: center;
@@ -280,27 +767,22 @@
             gap: 10px;
         }
         .hot-item {
-            background: var(--glass);
+            background: rgba(51, 65, 85, 0.6);
             backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-light);
             padding: 10px 18px;
             border-radius: 50px;
             font-size: 14px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: var(--shadow-sm);
             font-weight: 500;
         }
         .hot-item:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: var(--shadow-md);
-            background: linear-gradient(135deg, var(--primary-light) 0%, #fff 100%);
+            transform: translateY(-2px);
+            background: rgba(99, 102, 241, 0.2);
             border-color: var(--primary);
-            color: var(--primary-dark);
-        }
-        .hot-item:active {
-            transform: translateY(-1px) scale(0.98);
+            color: var(--primary-light);
         }
         .section-title {
             font-size: 17px;
@@ -318,16 +800,15 @@
             gap: 12px;
         }
         .tag {
-            background: var(--glass);
+            background: rgba(51, 65, 85, 0.6);
             backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             color: var(--text);
             padding: 14px 22px;
             border-radius: 50px;
             font-size: 15px;
             cursor: pointer;
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: var(--shadow-sm);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -342,36 +823,21 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
             transition: left 0.6s ease;
         }
         .tag:hover::before {
             left: 100%;
         }
         .tag:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: var(--shadow-md);
-            border-color: rgba(224,122,58,0.4);
-        }
-        .tag:active {
-            transform: translateY(-2px) scale(0.98);
+            transform: translateY(-3px);
+            border-color: rgba(99, 102, 241, 0.4);
         }
         .tag.on {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: #fff;
             border-color: var(--primary);
             box-shadow: var(--shadow-glow);
-            transform: translateY(-4px) scale(1.02);
-        }
-        .tag.on::before {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-        }
-        .tag.on:hover {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: #fff;
-            border-color: var(--primary);
-            box-shadow: 0 8px 25px rgba(224,122,58,0.4);
-            transform: translateY(-3px);
         }
         .tag.on::before {
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
@@ -379,12 +845,11 @@
 
         /* 输入区 */
         .input-box {
-            background: var(--glass);
+            background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-lg);
-            padding: 30px;
-            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-xl);
+            padding: 32px;
             margin-bottom: 28px;
             position: relative;
             overflow: hidden;
@@ -392,7 +857,7 @@
         }
         .input-box:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+            border-color: rgba(99, 102, 241, 0.3);
         }
         .input-box::before {
             content: '';
@@ -400,8 +865,8 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--blue) 40%, var(--green) 100%);
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
             animation: shimmer 3s linear infinite;
             background-size: 200% 100%;
         }
@@ -416,25 +881,22 @@
         }
         .desc-textarea {
             width: 100%;
-            border: 2px solid rgba(224,122,58,0.18);
-            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
             padding: 20px;
             font-size: 16px;
             outline: none;
             resize: vertical;
-            min-height: 150px;
+            min-height: 160px;
             font-family: inherit;
             line-height: 1.65;
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            background: rgba(255,255,255,0.6);
-            backdrop-filter: blur(12px);
+            background: rgba(15, 23, 42, 0.6);
             color: var(--text);
         }
         .desc-textarea:focus {
             border-color: var(--primary);
-            background: rgba(255,255,255,0.9);
-            box-shadow: 0 0 0 6px rgba(224,122,58,0.12);
-            transform: translateY(-2px);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
         }
         .desc-textarea::placeholder {
             color: var(--text-muted);
@@ -447,9 +909,9 @@
             align-items: center;
             gap: 8px;
             padding: 12px 16px;
-            background: rgba(224,122,58,0.08);
-            border-radius: var(--radius-sm);
-            border: 1px solid rgba(224,122,58,0.12);
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(99, 102, 241, 0.15);
         }
         .gen-btn {
             width: 100%;
@@ -457,13 +919,13 @@
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             border: none;
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-lg);
             font-size: 17px;
             font-weight: 600;
             margin-top: 22px;
             cursor: pointer;
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: var(--shadow-glow);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -486,7 +948,7 @@
         }
         .gen-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(224,122,58,0.5);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.5);
         }
         .gen-btn:active {
             transform: translateY(-1px);
@@ -502,7 +964,8 @@
             padding: 12px 16px;
             background: rgba(240,173,78,0.1);
             border-radius: 12px;
-            border-left: 4px solid var(--yellow);
+            border: 1px solid rgba(240,173,78,0.2);
+            border-left: 4px solid var(--warning);
             display: none;
         }
         .fallacy-warning.show {
@@ -520,12 +983,12 @@
         }
         .fallacy-title {
             font-weight: 600;
-            color: #8a6d3b;
+            color: var(--warning);
             font-size: 14px;
         }
         .fallacy-desc {
             font-size: 13px;
-            color: #6b5b3c;
+            color: var(--text-light);
             line-height: 1.5;
         }
         .fallacy-highlight {
@@ -540,11 +1003,10 @@
             display: none;
             text-align: center;
             padding: 60px 0;
-            background: var(--glass);
+            background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
             margin-bottom: 24px;
         }
         .loading-box.show { 
@@ -559,7 +1021,7 @@
         }
         .loading-ring {
             position: absolute;
-            border: 4px solid rgba(224,122,58,0.1);
+            border: 4px solid rgba(99, 102, 241, 0.1);
             border-top-color: var(--primary);
             border-radius: 50%;
             width: 100%;
@@ -568,7 +1030,7 @@
         }
         .loading-ring:nth-child(2) {
             animation-delay: 0.15s;
-            border-top-color: var(--blue);
+            border-top-color: var(--secondary);
             width: 80%;
             height: 80%;
             top: 10%;
@@ -576,7 +1038,7 @@
         }
         .loading-ring:nth-child(3) {
             animation-delay: 0.3s;
-            border-top-color: var(--green);
+            border-top-color: var(--accent);
             width: 60%;
             height: 60%;
             top: 20%;
@@ -595,14 +1057,13 @@
         }
         .result-area.show { display: block; }
         .card {
-            background: var(--glass);
+            background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 22px;
-            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 28px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
-            border-left: 6px solid var(--gray);
+            border-left: 4px solid var(--gray-500);
             transition: all 0.35s;
             position: relative;
             overflow: hidden;
@@ -618,25 +1079,25 @@
         }
         .card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            border-color: rgba(99, 102, 241, 0.3);
         }
         .card-reason {
             border-left-color: var(--primary);
-            background: linear-gradient(135deg, rgba(224,122,58,0.08) 0%, rgba(255,255,255,0.7) 100%);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(30, 41, 59, 0.7) 100%);
         }
         .card-reason::before {
             background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📌%3C/text%3E%3C/svg%3E") no-repeat;
         }
         .card-script {
-            border-left-color: var(--blue);
-            background: linear-gradient(135deg, rgba(74,139,192,0.08) 0%, rgba(255,255,255,0.7) 100%);
+            border-left-color: var(--accent);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(30, 41, 59, 0.7) 100%);
         }
         .card-script::before {
             background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💬%3C/text%3E%3C/svg%3E") no-repeat;
         }
         .card-rebuttal {
-            border-left-color: var(--gray);
-            background: linear-gradient(135deg, rgba(158,158,158,0.08) 0%, rgba(255,255,255,0.7) 100%);
+            border-left-color: var(--secondary);
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(30, 41, 59, 0.7) 100%);
         }
         .card-rebuttal::before {
             background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🛡️%3C/text%3E%3C/svg%3E") no-repeat;
@@ -648,24 +1109,24 @@
             margin-bottom: 14px;
         }
         .card-icon {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 22px;
             flex-shrink: 0;
             animation: bounceIn 0.5s ease-out;
         }
         .card-reason .card-icon {
-            background: rgba(224,122,58,0.15);
+            background: rgba(99, 102, 241, 0.2);
         }
         .card-script .card-icon {
-            background: rgba(74,139,192,0.15);
+            background: rgba(6, 182, 212, 0.2);
         }
         .card-rebuttal .card-icon {
-            background: rgba(158,158,158,0.15);
+            background: rgba(236, 72, 153, 0.2);
         }
         .card h3 { 
             font-size: 17px; 
@@ -674,14 +1135,14 @@
         }
         .card p {
             font-size: 15px; 
-            color: #333;
+            color: var(--text-light);
             line-height: 1.8; 
             white-space: pre-wrap;
             position: relative;
             z-index: 1;
         }
         .card p strong {
-            color: var(--primary);
+            color: var(--primary-light);
             font-weight: 600;
         }
 
@@ -692,44 +1153,39 @@
             gap: 10px;
             margin-top: 18px;
             padding: 14px 24px;
-            background: rgba(255,255,255,0.8);
-            border: 2px solid var(--blue);
-            color: var(--blue);
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: var(--primary-light);
             border-radius: 14px;
             font-size: 15px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             width: fit-content;
-            box-shadow: 0 4px 12px rgba(74,139,192,0.1);
         }
         .copy-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(74,139,192,0.2);
-            background: var(--blue);
-            color: white;
+            transform: translateY(-2px);
+            background: rgba(99, 102, 241, 0.25);
+            border-color: var(--primary);
         }
         .copy-btn.done {
-            background: var(--green);
-            color: white;
-            border-color: var(--green);
-            box-shadow: 0 4px 12px rgba(92,184,92,0.3);
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            border-color: var(--success);
         }
 
         /* 证据清单 */
         .evidence-card {
-            background: var(--glass);
+            background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
             padding: 24px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
-            border-left: 6px solid var(--yellow);
-            background: linear-gradient(135deg, rgba(240,173,78,0.06) 0%, rgba(255,255,255,0.7) 100%);
+            border-left: 4px solid var(--warning);
         }
         .evidence-card .card-icon {
-            background: rgba(240,173,78,0.15);
+            background: rgba(240, 173, 78, 0.2);
         }
         .evidence-list {
             display: flex;
@@ -742,16 +1198,16 @@
             align-items: center;
             gap: 8px;
             padding: 10px 18px;
-            background: rgba(240,173,78,0.12);
+            background: rgba(240,173,78,0.15);
             border-radius: 25px;
             font-size: 14px;
-            color: #8a6d3b;
+            color: var(--text-light);
             transition: all 0.3s;
             animation: fadeInUp 0.4s ease-out backwards;
         }
         .evidence-item:hover {
             transform: translateY(-2px);
-            background: rgba(240,173,78,0.2);
+            background: rgba(240,173,78,0.25);
         }
         .evidence-item:nth-child(1) { animation-delay: 0.1s; }
         .evidence-item:nth-child(2) { animation-delay: 0.2s; }
@@ -762,8 +1218,8 @@
             width: 18px;
             height: 18px;
             border-radius: 50%;
-            background: rgba(92,184,92,0.2);
-            color: var(--green);
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -784,7 +1240,7 @@
             justify-content: center;
             gap: 10px;
             padding: 16px;
-            border-radius: 16px;
+            border-radius: 14px;
             font-size: 15px;
             font-weight: 500;
             cursor: pointer;
@@ -800,31 +1256,30 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s;
         }
         .action-btn:hover::before {
             left: 100%;
         }
         .action-btn-call {
-            background: linear-gradient(135deg, var(--green) 0%, #4cae4c 100%);
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
             color: white;
-            box-shadow: 0 8px 20px rgba(92,184,92,0.4);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
         }
         .action-btn-call:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(92,184,92,0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(16, 185, 129, 0.45);
         }
         .action-btn-share {
-            background: rgba(255,255,255,0.8);
-            color: var(--text);
-            border: 2px solid rgba(224,122,58,0.3);
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary-light);
+            border: 1px solid rgba(99, 102, 241, 0.3);
         }
         .action-btn-share:hover {
             border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(224,122,58,0.2);
+            background: rgba(99, 102, 241, 0.25);
+            transform: translateY(-3px);
         }
 
         /* 反馈区域 */
@@ -835,19 +1290,18 @@
             gap: 20px;
             margin-top: 24px;
             padding: 20px;
-            background: var(--glass);
+            background: rgba(30, 41, 59, 0.5);
             backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 18px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
         }
         .feedback-row span {
             color: var(--text-light);
             font-size: 15px;
         }
         .feedback-btn {
-            background: rgba(255,255,255,0.6);
-            border: 2px solid rgba(224,122,58,0.2);
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
             border-radius: 50%;
             font-size: 36px;
             cursor: pointer;
@@ -855,13 +1309,13 @@
             padding: 12px;
         }
         .feedback-btn:hover {
-            transform: scale(1.3);
+            transform: scale(1.2);
             border-color: var(--primary);
-            background: rgba(224,122,58,0.1);
+            background: rgba(99, 102, 241, 0.25);
         }
         .feedback-btn.liked {
             animation: bounceHeart 0.6s ease-out;
-            color: var(--red);
+            color: var(--danger);
         }
 
         /* 再试一次按钮 */
@@ -869,12 +1323,12 @@
             width: 100%;
             padding: 16px;
             margin-top: 20px;
-            background: rgba(255,255,255,0.6);
-            border: 2px solid rgba(224,122,58,0.3);
-            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0.15) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 14px;
             color: var(--text);
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
@@ -884,9 +1338,8 @@
         }
         .retry-btn:hover {
             border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(224,122,58,0.15);
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
         }
 
         /* 历史记录 */
@@ -917,8 +1370,8 @@
             transition: all 0.3s;
         }
         .clear-history:hover {
-            color: var(--red);
-            background: rgba(217,83,79,0.1);
+            color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
         }
         .history-list {
             display: none;
@@ -927,13 +1380,12 @@
             display: block;
         }
         .history-item {
-            background: var(--glass);
+            background: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
             padding: 18px;
             margin-bottom: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             cursor: pointer;
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
@@ -942,8 +1394,7 @@
         }
         .history-item:hover {
             transform: translateX(10px);
-            box-shadow: 0 8px 22px rgba(0,0,0,0.08);
-            border-color: rgba(224,122,58,0.3);
+            border-color: rgba(99, 102, 241, 0.3);
         }
         .history-icon {
             width: 44px;
@@ -954,6 +1405,7 @@
             justify-content: center;
             font-size: 20px;
             flex-shrink: 0;
+            background: rgba(99, 102, 241, 0.15);
         }
         .history-content {
             flex: 1;
@@ -991,19 +1443,18 @@
             justify-content: center;
             gap: 8px;
             padding: 14px;
-            background: rgba(255,255,255,0.7);
-            border: 1px solid rgba(74,139,192,0.3);
-            border-radius: 14px;
-            color: var(--blue);
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            color: var(--primary-light);
             font-size: 14px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
         }
         .export-btn:hover {
-            background: var(--blue);
-            color: white;
-            border-color: var(--blue);
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--primary);
             transform: translateY(-2px);
         }
 
@@ -1349,223 +1800,6 @@
             text-align: center;
             margin-top: 4px;
         }
-
-        /* 响应式设计 */
-        
-        /* 平板端 (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .main-wrap {
-                padding: 0 16px;
-            }
-            .logo {
-                font-size: 36px;
-            }
-            .tag-list {
-                justify-content: center;
-            }
-            .tag {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            .input-box {
-                padding: 24px;
-            }
-            .card {
-                padding: 24px;
-            }
-        }
-        
-        /* 手机端 (481px - 767px) */
-        @media (max-width: 767px) {
-            .main-wrap {
-                padding: 0 12px;
-            }
-            .header {
-                padding: 20px 0;
-            }
-            .logo {
-                font-size: 32px;
-            }
-            .logo-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-            .sub {
-                font-size: 14px;
-            }
-            .help-badge {
-                padding: 6px 14px;
-                font-size: 12px;
-            }
-            .tag-list {
-                gap: 10px;
-            }
-            .tag {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            .input-box {
-                padding: 20px;
-            }
-            .desc-textarea {
-                padding: 14px;
-                font-size: 14px;
-                min-height: 120px;
-            }
-            .card {
-                padding: 20px;
-            }
-            .card p {
-                font-size: 14px;
-            }
-            .action-btn {
-                padding: 14px 12px;
-                font-size: 14px;
-            }
-            .section-title {
-                font-size: 16px;
-            }
-            .card-header h3 {
-                font-size: 16px;
-            }
-        }
-        
-        /* 小屏手机端 (0 - 480px) */
-        @media (max-width: 480px) {
-            .main-wrap {
-                padding: 0 8px;
-            }
-            .header {
-                padding: 16px 0;
-            }
-            .logo {
-                font-size: 28px;
-            }
-            .logo-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 18px;
-            }
-            .sub {
-                font-size: 13px;
-            }
-            .help-badge {
-                padding: 4px 12px;
-                font-size: 11px;
-            }
-            .tag-list {
-                gap: 8px;
-            }
-            .tag {
-                padding: 8px 14px;
-                font-size: 12px;
-            }
-            .hot-section {
-                margin-bottom: 16px;
-            }
-            .hot-title {
-                font-size: 14px;
-                margin-bottom: 12px;
-            }
-            .hot-list {
-                gap: 8px;
-            }
-            .hot-item {
-                padding: 8px 14px;
-                font-size: 12px;
-            }
-            .input-box {
-                padding: 16px;
-            }
-            .label {
-                font-size: 14px;
-                margin-bottom: 12px;
-            }
-            .desc-textarea {
-                padding: 12px;
-                font-size: 13px;
-                min-height: 100px;
-            }
-            .card {
-                padding: 16px;
-                border-radius: 16px;
-            }
-            .card-header {
-                margin-bottom: 14px;
-            }
-            .card-header h3 {
-                font-size: 15px;
-            }
-            .card-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 16px;
-            }
-            .card p {
-                font-size: 13px;
-                line-height: 1.6;
-            }
-            .gen-btn {
-                padding: 14px 20px;
-                font-size: 14px;
-            }
-            .action-btn {
-                padding: 12px 10px;
-                font-size: 12px;
-                gap: 6px;
-            }
-            .action-btn span:first-child {
-                font-size: 14px;
-            }
-            .section-title {
-                font-size: 15px;
-                margin-bottom: 12px;
-            }
-            .strength-bar {
-                height: 10px;
-            }
-            .strength-score {
-                font-size: 24px;
-            }
-            .strength-label {
-                font-size: 12px;
-            }
-            .law-list {
-                gap: 12px;
-            }
-            .law-item {
-                padding: 12px;
-            }
-            .law-title {
-                font-size: 13px;
-            }
-            .law-desc {
-                font-size: 12px;
-            }
-            .fallacy-warning {
-                padding: 12px;
-                margin-top: 12px;
-            }
-            .fallacy-title {
-                font-size: 13px;
-            }
-            .fallacy-desc {
-                font-size: 12px;
-            }
-            .export-row {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .export-btn {
-                width: 100%;
-                padding: 12px;
-                font-size: 13px;
-            }
-            .tips {
-                font-size: 12px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1576,6 +1810,9 @@
         <!-- 头部 -->
         <div class="header">
             <div class="header-bg"></div>
+            <div class="theme-toggle" id="themeToggle" title="切换主题">
+                <span class="theme-icon">🌙</span>
+            </div>
             <div class="logo">
                 <span class="logo-icon">⚖️</span>
                 有理有据
@@ -1584,6 +1821,217 @@
             <div class="help-badge">
                 <span class="sparkle">✨</span>
                 已帮助 <strong id="helpNum">0</strong> 人找回底气
+            </div>
+        </div>
+
+        <!-- 功能导航 -->
+        <div class="feature-nav">
+            <button class="feature-btn active" data-tab="generator">
+                <span class="feature-icon">✨</span>
+                <span>话术生成</span>
+            </button>
+            <button class="feature-btn" data-tab="knowledge">
+                <span class="feature-icon">📚</span>
+                <span>法律知识</span>
+            </button>
+            <button class="feature-btn" data-tab="calculator">
+                <span class="feature-icon">🧮</span>
+                <span>赔偿计算</span>
+            </button>
+            <button class="feature-btn" data-tab="templates">
+                <span class="feature-icon">📋</span>
+                <span>话术收藏</span>
+            </button>
+        </div>
+
+        <!-- 法律知识库 -->
+        <div class="feature-section" id="knowledgeSection" style="display: none;">
+            <div class="section-title">
+                <span>📚</span>
+                法律知识库
+            </div>
+            <div class="knowledge-grid">
+                <div class="knowledge-card" data-law="consumer">
+                    <div class="knowledge-icon">🛡️</div>
+                    <div class="knowledge-title">消费者权益保护法</div>
+                    <div class="knowledge-desc">退货退款、商品质量、虚假宣传等</div>
+                </div>
+                <div class="knowledge-card" data-law="contract">
+                    <div class="knowledge-icon">📝</div>
+                    <div class="knowledge-title">合同法</div>
+                    <div class="knowledge-desc">格式条款、违约金、解除合同等</div>
+                </div>
+                <div class="knowledge-card" data-law="express">
+                    <div class="knowledge-icon">📦</div>
+                    <div class="knowledge-title">快递暂行条例</div>
+                    <div class="knowledge-desc">快递丢失、损毁延误、赔偿标准等</div>
+                </div>
+                <div class="knowledge-card" data-law="food">
+                    <div class="knowledge-icon">🍱</div>
+                    <div class="knowledge-title">食品安全法</div>
+                    <div class="knowledge-desc">食品变质、过期、异物等</div>
+                </div>
+                <div class="knowledge-card" data-law="tourism">
+                    <div class="knowledge-icon">✈️</div>
+                    <div class="knowledge-title">旅游法</div>
+                    <div class="knowledge-desc">旅游纠纷、退团退费、强制购物等</div>
+                </div>
+                <div class="knowledge-card" data-law="online">
+                    <div class="knowledge-icon">💻</div>
+                    <div class="knowledge-title">电子商务法</div>
+                    <div class="knowledge-desc">网购七天无理由、平台责任等</div>
+                </div>
+            </div>
+            <div class="knowledge-detail" id="knowledgeDetail" style="display: none;">
+                <div class="knowledge-detail-header">
+                    <button class="back-btn" id="backToKnowledge">← 返回</button>
+                    <h3 id="lawTitle"></h3>
+                </div>
+                <div id="lawContent"></div>
+            </div>
+        </div>
+
+        <!-- 法律赔偿计算器 -->
+        <div class="feature-section" id="calculatorSection" style="display: none;">
+            <div class="section-title">
+                <span>🧮</span>
+                法律赔偿计算器
+            </div>
+            <div class="calculator-card">
+                <div class="calc-type-selector">
+                    <button class="calc-type-btn active" data-calc="price">商品价格</button>
+                    <button class="calc-type-btn" data-calc="damage">人身损害</button>
+                    <button class="calc-type-btn" data-calc="delay">快递延误</button>
+                    <button class="calc-type-btn" data-calc="deposit">定金罚则</button>
+                </div>
+                
+                <div class="calc-panel" id="calcPrice">
+                    <div class="calc-input-group">
+                        <label>商品价格（元）</label>
+                        <input type="number" id="productPrice" placeholder="请输入商品价格" value="">
+                    </div>
+                    <div class="calc-result" id="priceResult1">
+                        <span class="result-label">惩罚性赔偿（退一赔三）：</span>
+                        <span class="result-value">¥<strong id="punishAmount">0</strong></span>
+                    </div>
+                    <button class="calc-btn" onclick="calculatePrice()">计算</button>
+                </div>
+                
+                <div class="calc-panel" id="calcDamage" style="display: none;">
+                    <div class="calc-input-group">
+                        <label>医疗费用（元）</label>
+                        <input type="number" id="medicalFee" placeholder="请输入医疗费用" value="">
+                    </div>
+                    <div class="calc-input-group">
+                        <label>误工天数</label>
+                        <input type="number" id="workDays" placeholder="请输入误工天数" value="">
+                    </div>
+                    <div class="calc-input-group">
+                        <label>误工日收入（元）</label>
+                        <input type="number" id="dailyIncome" placeholder="请输入日收入" value="">
+                    </div>
+                    <div class="calc-result-box" id="damageResult">
+                        <div class="calc-result-item">
+                            <span>医疗费</span>
+                            <strong id="calcMedical">¥0</strong>
+                        </div>
+                        <div class="calc-result-item">
+                            <span>误工费</span>
+                            <strong id="calcWorkLoss">¥0</strong>
+                        </div>
+                        <div class="calc-result-item total">
+                            <span>合计</span>
+                            <strong id="calcDamageTotal">¥0</strong>
+                        </div>
+                    </div>
+                    <button class="calc-btn" onclick="calculateDamage()">计算</button>
+                </div>
+                
+                <div class="calc-panel" id="calcDelay" style="display: none;">
+                    <div class="calc-input-group">
+                        <label>快递费用（元）</label>
+                        <input type="number" id="expressFee" placeholder="请输入快递费用" value="">
+                    </div>
+                    <div class="calc-input-group">
+                        <label>延误天数</label>
+                        <input type="number" id="delayDays" placeholder="请输入延误天数" value="">
+                    </div>
+                    <div class="calc-info">
+                        <p>📌 根据《快递服务》标准：延误赔偿应为免除本次服务费用</p>
+                    </div>
+                    <div class="calc-result-box" id="delayResult">
+                        <div class="calc-result-item total">
+                            <span>延误赔偿</span>
+                            <strong id="calcDelayAmount">¥0</strong>
+                        </div>
+                    </div>
+                    <button class="calc-btn" onclick="calculateDelay()">计算</button>
+                </div>
+                
+                <div class="calc-panel" id="calcDeposit" style="display: none;">
+                    <div class="calc-input-group">
+                        <label>定金金额（元）</label>
+                        <input type="number" id="depositAmount" placeholder="请输入定金金额" value="">
+                    </div>
+                    <div class="calc-info">
+                        <p>📌 根据《民法典》：定金不得超过主合同标的额的20%</p>
+                    </div>
+                    <div class="calc-result-box" id="depositResult">
+                        <div class="calc-result-item">
+                            <span>最高定金（20%）</span>
+                            <strong id="calcMaxDeposit">¥0</strong>
+                        </div>
+                        <div class="calc-result-item">
+                            <span>违约方赔偿</span>
+                            <strong id="calcDepositPenalty">¥0</strong>
+                        </div>
+                        <div class="calc-result-item total">
+                            <span>收受方双倍返还</span>
+                            <strong id="calcDepositReturn">¥0</strong>
+                        </div>
+                    </div>
+                    <button class="calc-btn" onclick="calculateDeposit()">计算</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 话术模板收藏 -->
+        <div class="feature-section" id="templatesSection" style="display: none;">
+            <div class="section-title">
+                <span>📋</span>
+                话术模板收藏
+                <button class="add-template-btn" id="addTemplateBtn">+ 添加模板</button>
+            </div>
+            <div class="template-list" id="templateList">
+                <div class="template-empty">暂无收藏的话术模板</div>
+            </div>
+            <div class="template-form" id="templateForm" style="display: none;">
+                <div class="template-form-header">
+                    <h4>添加新模板</h4>
+                    <button class="close-form-btn" id="closeTemplateForm">×</button>
+                </div>
+                <div class="template-form-body">
+                    <div class="form-group">
+                        <label>模板标题</label>
+                        <input type="text" id="templateTitle" placeholder="例如：快递丢失投诉">
+                    </div>
+                    <div class="form-group">
+                        <label>适用场景</label>
+                        <select id="templateScene">
+                            <option value="kd">📦 快递问题</option>
+                            <option value="wm">🍱 外卖问题</option>
+                            <option value="tk">🛒 网购退货</option>
+                            <option value="zf">🏠 租房纠纷</option>
+                            <option value="js">💪 健身维权</option>
+                            <option value="qt">📝 其他</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>话术内容</label>
+                        <textarea id="templateContent" placeholder="输入你想收藏的话术内容..."></textarea>
+                    </div>
+                    <button class="save-template-btn" id="saveTemplate">保存模板</button>
+                </div>
             </div>
         </div>
 
@@ -1775,7 +2223,7 @@
         </div>
         
         <!-- 反馈链接 -->
-        <div class="feedback-link" id="feedbackLink">
+        <div class="feedback-link" id="feedbackLink" onclick="if(typeof openFeedbackModal === 'function') openFeedbackModal();">
             遇到问题？话术不准确？<span class="link-text">点我反馈</span>
         </div>
     </div>
@@ -1797,8 +2245,8 @@
             <h3>反馈意见</h3>
             <textarea class="feedback-textarea" id="feedbackTextarea" placeholder="请描述你遇到的问题或建议..."></textarea>
             <div class="modal-actions">
-                <button class="modal-btn modal-btn-cancel" id="feedbackCancelBtn">取消</button>
-                <button class="modal-btn modal-btn-submit" id="feedbackSubmitBtn">提交反馈</button>
+                <button class="modal-btn modal-btn-cancel" id="feedbackCancelBtn" onclick="if(typeof closeFeedbackModal === 'function') closeFeedbackModal();">取消</button>
+                <button class="modal-btn modal-btn-submit" id="feedbackSubmitBtn" onclick="if(typeof submitFeedback === 'function') submitFeedback();">提交反馈</button>
             </div>
         </div>
     </div>
@@ -1806,65 +2254,350 @@
     <script>
         // 等待DOM加载完成
         document.addEventListener('DOMContentLoaded', function() {
+            
+            // ---- 主题切换功能 ----
+            var themeToggle = document.getElementById('themeToggle');
+            var themeIcon = themeToggle.querySelector('.theme-icon');
+            var isLightTheme = localStorage.getItem('theme') === 'light';
+            
+            function applyTheme() {
+                if (isLightTheme) {
+                    document.body.classList.add('light-theme');
+                    themeIcon.textContent = '☀️';
+                } else {
+                    document.body.classList.remove('light-theme');
+                    themeIcon.textContent = '🌙';
+                }
+            }
+            applyTheme();
+            
+            themeToggle.addEventListener('click', function() {
+                isLightTheme = !isLightTheme;
+                localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+                applyTheme();
+            });
+            
+            // ---- 功能导航切换 ----
+            var featureBtns = document.querySelectorAll('.feature-btn');
+            var generatorSection = document.querySelector('.scene-section');
+            var knowledgeSection = document.getElementById('knowledgeSection');
+            var calculatorSection = document.getElementById('calculatorSection');
+            var templatesSection = document.getElementById('templatesSection');
+            
+            function showSection(sectionName) {
+                generatorSection.style.display = 'none';
+                knowledgeSection.style.display = 'none';
+                calculatorSection.style.display = 'none';
+                templatesSection.style.display = 'none';
+                
+                featureBtns.forEach(function(btn) {
+                    btn.classList.remove('active');
+                });
+                
+                document.querySelector('[data-tab="' + sectionName + '"]').classList.add('active');
+                
+                if (sectionName === 'generator') {
+                    generatorSection.style.display = 'block';
+                } else if (sectionName === 'knowledge') {
+                    knowledgeSection.style.display = 'block';
+                } else if (sectionName === 'calculator') {
+                    calculatorSection.style.display = 'block';
+                } else if (sectionName === 'templates') {
+                    templatesSection.style.display = 'block';
+                }
+            }
+            
+            featureBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    showSection(this.getAttribute('data-tab'));
+                });
+            });
+            
+            // ---- 法律知识库功能 ----
+            var lawData = {
+                consumer: {
+                    title: '消费者权益保护法',
+                    content: [
+                        { title: '第七条 保障安全权', desc: '消费者在购买、使用商品和接受服务时享有人身、财产安全不受损害的权利。消费者有权要求经营者提供的商品和服务，符合保障人身、财产安全的要求。' },
+                        { title: '第二十五条 七天无理由退货', desc: '经营者采用网络、电视、电话、邮购等方式销售商品，消费者有权自收到商品之日起七日内退货，且无需说明理由，但下列商品除外：（一）消费者定作的；（二）鲜活易腐的；（三）在线下载或者消费者拆封的音像制品、计算机软件等数字化商品；（四）交付的报纸、期刊。' },
+                        { title: '第五十五条 惩罚性赔偿', desc: '经营者提供商品或者服务有欺诈行为的，应当按照消费者的要求增加赔偿其受到的损失，增加赔偿的金额为消费者购买商品的价款或者接受服务的费用的三倍；增加赔偿的金额不足五百元的，为五百元。' },
+                        { title: '第四十四条 平台责任', desc: '消费者通过网络交易平台购买商品或者接受服务，其合法权益受到损害的，可以向销售者或者服务者要求赔偿。网络交易平台提供者不能提供销售者或者服务者的真实名称、地址和有效联系方式的，消费者也可以向网络交易平台提供者要求赔偿。' }
+                    ]
+                },
+                contract: {
+                    title: '民法典 - 合同编',
+                    content: [
+                        { title: '第四百九十六条 格式条款', desc: '格式条款是当事人为了重复使用而预先拟定，并在订立合同时未与对方协商的条款。采用格式条款订立合同的，提供格式条款的一方应当遵循公平原则确定当事人之间的权利和义务，并采取合理的方式提示对方注意免除或者减轻其责任、加重对方责任等与对方有重大利害关系的条款。' },
+                        { title: '第五百八十五条 违约金', desc: '当事人可以约定一方违约时应当根据违约情况向对方支付一定数额的违约金，也可以约定因违约产生的损失赔偿额的计算方法。约定的违约金低于造成的损失的，人民法院或者仲裁机构可以根据当事人的请求予以增加。' },
+                        { title: '第五百七十七条 违约责任', desc: '当事人一方不履行合同义务或者履行合同义务不符合约定的，应当承担继续履行、采取补救措施或者赔偿损失等违约责任。' },
+                        { title: '第五百六十三条 合同解除', desc: '当事人一方迟延履行主要债务，经催告后在合理期限内仍未履行的，当事人可以解除合同。合同解除后，尚未履行的，终止履行；已经履行的，根据履行情况和合同性质，当事人可以请求恢复原状或者采取其他补救措施。' }
+                    ]
+                },
+                express: {
+                    title: '快递暂行条例',
+                    content: [
+                        { title: '第二十五条 投递规定', desc: '经营快递业务的企业应当将快件投递到约定的收件地址、收件人或者收件人指定的代收人，并告知收件人或者代收人当面验收。收件人或者代收人有权当面验收。' },
+                        { title: '第二十七条 延误赔偿', desc: '快件延误、丢失、损毁或者内件短少的，对保价的快件，应当按照经营快递业务的企业与用户约定的保价规则确定赔偿责任；对未保价的快件，依照民事法律的有关规定确定赔偿责任。' },
+                        { title: '第十九条 不得抛扔踩踏', desc: '任何单位和个人不得利用信件、包裹、印刷品等寄递物品从事危害国家安全、公共安全的违法活动。任何单位和个人不得非法检查他人信件、包裹、印刷品等寄递物品，不得非法扣押。' },
+                        { title: '第二十一条 收寄验视', desc: '经营快递业务的企业在收寄信件以外的快件时，应当要求寄件人出示有效证件，并登记身份信息。' }
+                    ]
+                },
+                food: {
+                    title: '食品安全法',
+                    content: [
+                        { title: '第一百四十八条 十倍赔偿', desc: '生产不符合食品安全标准的食品或者经营明知是不符合食品安全标准的食品，消费者可以要求支付价款十倍或者损失三倍的赔偿金；增加赔偿的金额不足一千元的，为一千元。' },
+                        { title: '第三十四条 禁止行为', desc: '禁止生产经营腐败变质、油脂酸败、霉变生虫、污秽不洁、混有异物、掺假掺杂或者感官性状异常的食品。' },
+                        { title: '第一百二十五条 违法处罚', desc: '违反本法规定，有下列情形之一的，由县级以上人民政府食品安全监督管理部门责令改正，给予警告；拒不改正的，处五千元以上五万元以下罚款；情节严重的，责令停产停业，直至吊销许可证。' },
+                        { title: '第一百五十条 definitions', desc: '本法所称食品安全，是指食品无毒、无害，符合应当有的营养要求，对人体健康不造成任何急性、亚急性或者慢性危害。' }
+                    ]
+                },
+                tourism: {
+                    title: '旅游法',
+                    content: [
+                        { title: '第三十五条 不得强制购物', desc: '旅行社不得以不合理的低价组织旅游活动，诱骗旅游者，并通过安排购物或者另行付费旅游项目获取回扣等不正当利益。旅行社组织、接待旅游者，不得指定具体购物场所，不得安排另行付费旅游项目。' },
+                        { title: '第三十七条 导游费用', desc: '导游和领队为旅游者提供服务必须接受旅行社委派，不得私自承揽导游和领队业务。导游和领队从事导游、领队活动应当依法取得导游证。' },
+                        { title: '第九十一条 投诉受理', desc: '县级以上人民政府应当建立健全旅游投诉受理机制，指定投诉受理机构，公布投诉电话、电子邮箱等联系方式，方便旅游者投诉。' },
+                        { title: '第六十三条 不可抗力', desc: '因不可抗力或者旅行社、履行辅助人已尽合理注意义务仍不能避免的事件，影响旅游行程，造成旅游者滞留的，旅行社应当采取相应的安置措施。因此增加的食宿费用，由旅游者承担；增加的返程费用，由旅行社与旅游者分担。' }
+                    ]
+                },
+                online: {
+                    title: '电子商务法',
+                    content: [
+                        { title: '第四十九条 合同成立', desc: '电子商务经营者发布的商品或者服务信息符合要约条件的，用户选择该商品或者服务并提交订单成功，合同成立。电子商务经营者不得以格式条款等方式约定消费者支付价款后合同不成立。' },
+                        { title: '第十七条 知情权', desc: '电子商务经营者应当全面、真实、准确、及时地披露商品或者服务信息，保障消费者的知情权。电子商务经营者不得以虚构交易、编造用户评价等方式进行虚假或者引人误解的商业宣传，欺骗、误导消费者。' },
+                        { title: '第三十八条 平台连带责任', desc: '电子商务平台经营者知道或者应当知道平台内经营者销售的商品或者提供的服务不符合保障人身、财产安全的要求，或者有其他侵害消费者合法权益行为，未采取必要措施的，依法与该平台内经营者承担连带责任。' },
+                        { title: '第二十条 七日无理由退货', desc: '经营者采用网络、电视、电话、邮购等方式销售商品，消费者有权自收到商品之日起七日内退货，且无需说明理由。经营者应当自收到退回商品之日起七日内返还消费者支付的商品价款。' }
+                    ]
+                }
+            };
+            
+            document.querySelectorAll('.knowledge-card').forEach(function(card) {
+                card.addEventListener('click', function() {
+                    var lawKey = this.getAttribute('data-law');
+                    var law = lawData[lawKey];
+                    
+                    if (law) {
+                        document.getElementById('lawTitle').textContent = law.title;
+                        var contentHtml = '';
+                        law.content.forEach(function(article) {
+                            contentHtml += '<div class="law-article">';
+                            contentHtml += '<div class="law-article-title">' + article.title + '</div>';
+                            contentHtml += '<div class="law-article-content">' + article.desc + '</div>';
+                            contentHtml += '</div>';
+                        });
+                        document.getElementById('lawContent').innerHTML = contentHtml;
+                        document.querySelector('.knowledge-grid').style.display = 'none';
+                        document.getElementById('knowledgeDetail').style.display = 'block';
+                    }
+                });
+            });
+            
+            document.getElementById('backToKnowledge').addEventListener('click', function() {
+                document.querySelector('.knowledge-grid').style.display = 'grid';
+                document.getElementById('knowledgeDetail').style.display = 'none';
+            });
+            
+            // ---- 法律赔偿计算器功能 ----
+            document.querySelectorAll('.calc-type-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var calcType = this.getAttribute('data-calc');
+                    document.querySelectorAll('.calc-type-btn').forEach(function(b) {
+                        b.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    document.getElementById('calcPrice').style.display = 'none';
+                    document.getElementById('calcDamage').style.display = 'none';
+                    document.getElementById('calcDelay').style.display = 'none';
+                    document.getElementById('calcDeposit').style.display = 'none';
+                    document.getElementById('calc' + calcType.charAt(0).toUpperCase() + calcType.slice(1)).style.display = 'block';
+                });
+            });
+            
+            window.calculatePrice = function() {
+                var price = parseFloat(document.getElementById('productPrice').value) || 0;
+                var punishAmount = price >= 500 ? price * 3 : 1500;
+                document.getElementById('punishAmount').textContent = punishAmount.toFixed(0);
+            };
+            
+            window.calculateDamage = function() {
+                var medical = parseFloat(document.getElementById('medicalFee').value) || 0;
+                var days = parseInt(document.getElementById('workDays').value) || 0;
+                var income = parseFloat(document.getElementById('dailyIncome').value) || 0;
+                var workLoss = days * income;
+                var total = medical + workLoss;
+                
+                document.getElementById('calcMedical').textContent = '¥' + medical.toFixed(0);
+                document.getElementById('calcWorkLoss').textContent = '¥' + workLoss.toFixed(0);
+                document.getElementById('calcDamageTotal').textContent = '¥' + total.toFixed(0);
+            };
+            
+            window.calculateDelay = function() {
+                var fee = parseFloat(document.getElementById('expressFee').value) || 0;
+                document.getElementById('calcDelayAmount').textContent = '¥' + fee.toFixed(0);
+            };
+            
+            window.calculateDeposit = function() {
+                var amount = parseFloat(document.getElementById('depositAmount').value) || 0;
+                var maxDeposit = amount * 0.2;
+                var penalty = amount;
+                var returnAmount = amount * 2;
+                
+                document.getElementById('calcMaxDeposit').textContent = '¥' + maxDeposit.toFixed(0);
+                document.getElementById('calcDepositPenalty').textContent = '¥' + penalty.toFixed(0);
+                document.getElementById('calcDepositReturn').textContent = '¥' + returnAmount.toFixed(0);
+            };
+            
+            // ---- 话术模板收藏功能 ----
+            var templates = JSON.parse(localStorage.getItem('templates') || '[]');
+            
+            function renderTemplates() {
+                var list = document.getElementById('templateList');
+                if (templates.length === 0) {
+                    list.innerHTML = '<div class="template-empty">暂无收藏的话术模板</div>';
+                    return;
+                }
+                
+                var html = '';
+                templates.forEach(function(template, index) {
+                    var sceneMap = {
+                        'kd': '📦 快递问题',
+                        'wm': '🍱 外卖问题',
+                        'tk': '🛒 网购退货',
+                        'zf': '🏠 租房纠纷',
+                        'js': '💪 健身维权',
+                        'qt': '📝 其他'
+                    };
+                    html += '<div class="template-item">';
+                    html += '<div class="template-header">';
+                    html += '<div class="template-title">' + template.title + '</div>';
+                    html += '<span class="template-scene">' + (sceneMap[template.scene] || template.scene) + '</span>';
+                    html += '</div>';
+                    html += '<div class="template-content">' + template.content.replace(/\n/g, '<br>') + '</div>';
+                    html += '<div class="template-actions">';
+                    html += '<button class="template-action-btn" onclick="useTemplate(' + index + ')">使用此模板</button>';
+                    html += '<button class="template-action-btn delete" onclick="deleteTemplate(' + index + ')">删除</button>';
+                    html += '</div>';
+                    html += '</div>';
+                });
+                list.innerHTML = html;
+            }
+            
+            renderTemplates();
+            
+            document.getElementById('addTemplateBtn').addEventListener('click', function() {
+                document.getElementById('templateForm').style.display = 'block';
+            });
+            
+            document.getElementById('closeTemplateForm').addEventListener('click', function() {
+                document.getElementById('templateForm').style.display = 'none';
+            });
+            
+            document.getElementById('saveTemplate').addEventListener('click', function() {
+                var title = document.getElementById('templateTitle').value.trim();
+                var scene = document.getElementById('templateScene').value;
+                var content = document.getElementById('templateContent').value.trim();
+                
+                if (!title || !content) {
+                    alert('请填写完整的模板信息');
+                    return;
+                }
+                
+                templates.push({ title: title, scene: scene, content: content });
+                localStorage.setItem('templates', JSON.stringify(templates));
+                renderTemplates();
+                
+                document.getElementById('templateTitle').value = '';
+                document.getElementById('templateContent').value = '';
+                document.getElementById('templateForm').style.display = 'none';
+            });
+            
+            window.deleteTemplate = function(index) {
+                if (confirm('确定要删除这个模板吗？')) {
+                    templates.splice(index, 1);
+                    localStorage.setItem('templates', JSON.stringify(templates));
+                    renderTemplates();
+                }
+            };
+            
+            window.useTemplate = function(index) {
+                var template = templates[index];
+                var sceneMap = {
+                    'kd': 'kd', 'wm': 'wm', 'tk': 'tk', 'zf': 'zf', 'js': 'js', 'qt': 'qt'
+                };
+                
+                var sceneKey = template.scene;
+                document.querySelectorAll('.tag').forEach(function(tag) {
+                    tag.classList.remove('active');
+                    if (tag.getAttribute('data-k') === sceneKey) {
+                        tag.classList.add('active');
+                    }
+                });
+                
+                document.getElementById('descInput').value = template.content;
+                showSection('generator');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            
             // ---- 话术数据 ----
         var db = {
             kd: {
-                reason: "根据<strong>《快递暂行条例》</strong>第二十五条，经营快递业务的企业应当将快件投递到约定的收件地址、收件人或者收件人指定的代收人，并告知收件人或者代收人当面验收。快递员没经过你同意就放门口，属于未履行送达义务，丢了是快递公司的责任，保不保价都该赔偿。",
-                script: "您好，我快递单号<strong>XX</strong>显示签收，但我本人没收到，也没同意放门口。这是你们没尽到送达义务，麻烦今天内给我赔偿方案，不然我只能走12305投诉了。",
-                rebut: "要是对方说“没保价最多赔运费”\n你就说：“丢件是服务失误不是意外，得按实际损失赔偿。我订单金额<strong>XX元</strong>，支付凭证我都有。不处理我现在就打12305。”",
-                evidence: ["快递单号", "签收截图", "聊天记录", "价值凭证"],
+                reason: "快递员没经过你同意就把件放门口，这种操作本来就不合规。你想啊，快递公司跟你签的合同是“送到约定地址交到你手上”，放门口算啥？等于快递员自己改了合同条款。而且快递单上都有保价声明的，你没勾选低价赔付选项不代表你就同意了丢件不赔。《快递暂行条例》写得清清楚楚：未经同意放代收点或者自提柜，严格来说都算违规。你占理的地方有三个：第一，没同意放门口；第二，他们没提供有效签收凭证；第三，丢件是他们的责任不是你的。你要理直气壮一点，这不是小事，是你的合法权益被侵犯了。对方要是说“你没保价”，你就问他：“保价跟丢件是两码事，保价是声明价值，这个是快递公司服务失误造成丢失，要按实际损失赔！”",
+                script: "您好，我是收件人<strong>XXX</strong>，手机号<strong>XXX</strong>。\n\n我查询物流显示我的快递单号<strong>XXX</strong>已经在<strong>XX月XX日XX时</strong>被签收了，但我本人并没有收到任何取件通知，也从来没有同意让快递员把件放门口或者自提柜。\n\n这个快递里面是<strong>XXX</strong>，价值大约<strong>XXX元</strong>，对我很重要。现在件丢了，我这边是有购买记录和付款凭证的。\n\n我理解快递员可能工作压力大，但这个丢件确实是因为没有当面交接造成的，不是我的责任。我希望你们能尽快核实情况，在<strong>今天（XX月XX日）下午6点前</strong>给我一个的处理方案：是补发还是赔偿，请尽快回复我。\n\n如果今天下班前没有收到回复，我会继续向国家邮政局申诉网站（12305）反映这个情况，同时我也会保留向消费者协会投诉的权利。希望我们能友好协商解决，谢谢！",
+                rebut: "对方可能会说：“没保价的话，我们公司规定最多只能赔运费的3-5倍。”\n\n这时候你可以这样回复：\n\n“关于保价的问题，我想跟您说明一下：保价是针对快件价值的一种声明和额外收费服务，它不影响快递公司应承担的 基本赔偿义务。我这个快件丢失不是因为不可抗力，是因为咱们快递员没有按照规定流程派送造成的，这属于快递公司的服务失误。\n\n《快递市场管理办法》第十六条明确规定：快递服务组织与用户之间就快件丢失、损毁等赔偿有约定的，从其约定；没有约定的，按照实际损失赔偿。我这个快件的购买记录和付款凭证都在这里，实际损失就是<strong>XXX元</strong>。\n\n而且我要提醒您，如果这件事处理不好，我会向12305国家邮政局申诉，同时也会在各大平台分享这次经历。不只是为了我自己的权益，也是希望贵公司能改进派送流程，避免类似情况再发生。\n\n我希望能和平解决，请尽快给我一个满意的答复，谢谢！”",
+                evidence: ["快递单号", "物流签收截图", "与快递员/客服的聊天记录", "商品购买订单和付款凭证", "商品价值证明"],
                 hotline: "12305",
                 laws: [
-                    { title: "《快递暂行条例》第二十五条", desc: "经营快递业务的企业应当将快件投递到约定的收件地址、收件人或者收件人指定的代收人，并告知收件人或者代收人当面验收。" },
+                    { title: "《快递暂行条例》第二十五条", desc: "经营快递业务的企业应当将快件投递到约定的收件地址、收件人或者收件人指定的代收人，并告知收件人或者代收人当面验收。快件延误、丢失、损毁或者内件短少的，对保价的快件，应当按照经营快递业务的企业与用户约定的保价规则确定赔偿责任；对未保价的快件，依照民事法律的有关规定确定赔偿责任。" },
                     { title: "《民法典》第五百七十七条", desc: "当事人一方不履行合同义务或者履行合同义务不符合约定的，应当承担继续履行、采取补救措施或者赔偿损失等违约责任。" }
                 ],
                 strength: 85
             },
             wm: {
-                reason: "订单截图就是最直接的证据。外卖送错餐、超时送达都是商家或平台没按约定履行合同，你有权要求退款或重新配送。所谓的“已出餐不能退”是霸王条款，不受法律支持。",
-                script: "你好，我订单号是<strong>XX</strong>，结果送来的是<strong>XX</strong>，和我点的不一样。截图和照片我都有，麻烦帮我退款或者重新做一份，不然我直接找平台客服介入了。",
-                rebut: "商家说“出餐了不能退”\n回：“餐不对是你们的责任，不能退我就让平台客服来看证据，按平台规则处理。”",
-                evidence: ["订单截图", "送达照片", "聊天记录"],
+                reason: "外卖送错这件事，你一定要记住：这不是小问题，是商家和平台的合同义务没有履行到位。你下单的时候点的是什么，商家就应该给你送什么，这是最基本的契约精神。送错了，要么是商家打包的时候搞混了，要么是骑手配送的时候出了问题，但不管是哪个环节的问题，商家作为合同的履行方都有责任帮你解决。\n\n很多人会不好意思开口，觉得“反正也吃上了，凑合吃吧”，这种想法要改！你的钱花出去了，你有权拿到你点的东西。商家要是说“骑手送错了，你找骑手去”，这是在推卸责任，因为消费者和商家之间存在合同关系，商家需要保证你最终收到正确的东西。至于商家和骑手之间怎么结算，那是他们的事，跟你没关系。\n\n还有一点很重要：超时送达也是违约！外卖平台承诺的送达时间是商家和平台对你的承诺，超时就是违约。你完全可以要求部分退款或者取消订单全额退款。不要觉得超时几分钟无所谓，你的等待时间也是成本，商家应该为此负责。记住，消费者不是任人拿捏的冤大头，你的权益需要你自己去维护。",
+                script: "你好，我是订单号<strong>XXX</strong>的顾客，收餐地址是<strong>XXX</strong>。\n\n我要反映一个很重要的问题：我下单的是<strong>【你点的具体菜品名称】</strong>，但骑手给我送来的却是<strong>【实际收到的菜品】</strong>，完全不是我点的东西。这个情况我已经在平台上传了照片作为证据。\n\n我理解商家和骑手可能都很忙，送错一份餐对你们来说可能只是小概率事件，但对我来说这是100%的问题——我花了钱，饿着肚子等了半天，结果拿到的东西根本不是我想要的。现在这份餐我肯定是不能吃的，扔掉又浪费，我也很无奈。\n\n我的诉求是这样的：<strong>请帮我退款处理</strong>，款项原路返回就可以了。如果你这边愿意重新给我送一份正确的餐，我也可以接受，但需要明确一下送达时间。\n\n我希望能在<strong>今天XX点之前</strong>得到处理结果。如果平台客服介入的话，我也会如实反馈整个情况，包括送错餐这件事，还有你们处理问题的态度。\n\n谢谢理解，期待你的回复！",
+                rebut: "商家可能会说各种理由推脱，比如“骑手送错了你找骑手”、“已经出餐了不能退”、“你吃了一口不能退”等。遇到这种情况，你可以这样回复：\n\n“关于您说的这些问题，我想从法律角度跟你解释一下：\n\n第一，骑手是商家或者平台指定的配送方，骑手送错餐是商家履约过程中出现的问题，这个责任应该由商家承担，不能转嫁给消费者。我下单的时候是把钱付给商家的，不是付给骑手的，所以我只找商家。\n\n第二，说‘已经出餐了不能退’这个理由是不成立的。餐出错了本身就是商家的失误，不是消费者的失误。我没有理由为你们的错误买单。《消费者权益保护法》明确规定，消费者有权获得质量保障、价格合理、计量正确的商品和服务。\n\n第三，这份餐我根本没法吃，因为根本不是我点的东西。我没有吃过它，也没有造成浪费，所以不存在‘吃了一口不能退’的前提。\n\n我现在的诉求很简单：<strong>请全额退款</strong>。我不想把事情闹大，也不想给你添麻烦，但如果你这边坚持不处理的话，我只能向平台客服投诉，同时在评价里如实反馈这次经历。我希望我们能好聚好散，麻烦你帮我处理一下，谢谢！”",
+                evidence: ["订单截图（包含菜品名称、价格、下单时间）", "收到餐品的照片", "与商家/骑手的聊天记录", "送达时间记录（如果超时）"],
                 hotline: "12315",
                 laws: [
                     { title: "《消费者权益保护法》第二十六条", desc: "经营者不得以格式条款、通知、声明、店堂告示等方式，作出排除或者限制消费者权利、减轻或者免除经营者责任、加重消费者责任等对消费者不公平、不合理的规定。" },
-                    { title: "《电子商务法》第四十九条", desc: "电子商务经营者发布的商品或者服务信息符合要约条件的，用户选择该商品或者服务并提交订单成功，合同成立。" }
+                    { title: "《电子商务法》第四十九条", desc: "电子商务经营者发布的商品或者服务信息符合要约条件的，用户选择该商品或者服务并提交订单成功，合同成立。经营者不得以格式条款等方式约定消费者支付价款后合同不成立。" }
                 ],
                 strength: 80
             },
             tk: {
-                reason: "根据<strong>《消费者权益保护法》第二十五条</strong>，网购商品除特殊商品外，享有七天无理由退货权利。只要商品完好，拆包装检查不算使用，卖家拒绝退货是违法的。",
-                script: "亲，我要行使七天无理由退货权利，商品我没用过，包装完好。请提供退货地址，方便我寄回。要是拒绝的话我就找平台介入了。",
-                rebut: "对方说“拆了包装不能退”\n回：“只拆包装验货没实际使用，完全符合七天无理由退货规定，不然我让平台客服来判定。”",
-                evidence: ["订单截图", "商品照片", "聊天记录"],
+                reason: "七天无理由退货是《消费者权益保护法》赋予你的法定权利，不是商家的施舍！这是一项硬性规定，只要你买的是普通商品（注意：鲜活易腐、定制商品、报纸期刊等除外），收到货之后七天内你随时可以申请退货，不需要理由，不需要解释，你只要说“我不想要了”四个字就够了。\n\n很多商家会找各种借口拒绝你，比如说“拆封了不能退”、“用过不能退”、“没有质量问题不能退”等等。这些统统是商家自己定的霸王条款，在法律面前统统无效！你拆开包装检查商品，这是任何一个正常消费者的合理行为，法律明确说了“拆封检查不影响退货权利”。你试用了商品，只要没有造成商品价值明显减损（比如把衣服洗了、把电子产品弄坏了），同样有权退货。\n\n还有一点要记住：退货是你的权利，但退货产生的运费要看你和商家之间的约定。如果商品有质量问题（比如大小不合适、颜色有误差、颜色跟图片不一样等），退货运费应该由商家承担。如果只是你单纯不喜欢或者不想要了，运费可能需要你出，但退货本身的权利不受影响。遇到商家故意刁难不让你退货的，直接申请平台客服介入，现在各大电商平台对商家这种行为处罚都很严的。",
+                script: "您好，我是订单号<strong>XXX</strong>的买家，收货地址是<strong>XXX</strong>。\n\n我于<strong>XX月XX日</strong>在贵店购买了<strong>【商品名称】</strong>，订单金额<strong>XXX元</strong>，现在我想申请七天无理由退货。\n\n关于退货原因，我在这里就不详细说明了，《消费者权益保护法》第二十五条明确规定网购消费者享有七天无理由退货权利，我有权不需要任何理由就申请退货。我也查过相关法律，“只拆开包装检查商品”不属于影响二次销售的情况，“试穿试用了没有损坏”也不影响退货权利。\n\n商品我现在保持得很好，<strong>【描述商品现状，比如：吊牌还在、包装完好、没有清洗、没有损坏】</strong>，完全不影响二次销售。\n\n我的退货诉求如下：\n1. 请在<strong>24小时内</strong>提供正确的退货地址和退货流程\n2. 收到退货并确认商品无误后，请<strong>3个工作日内</strong>完成退款\n3. 退款请原路返回，优先退到<strong>【支付方式，比如：支付宝/微信/原银行卡】</strong>\n\n如果商家有任何疑问，请参考《消费者权益保护法》第二十五条和《网络购买商品七日无理由退货暂行办法》的相关规定。如果贵店坚持拒绝退货，我将申请平台客服介入，同时不排除向消费者协会（12315）或市场监管部门投诉。\n\n希望我们能顺利解决这个问题，谢谢！",
+                rebut: "卖家可能会用各种理由拒绝你，比如：“不好意思亲，拆封了就不能退了哦”、“这个是特价的，不在退货范围内哦”、“没有质量问题不能退货的哦”等等。遇到这些情况，你可以这样回复：\n\n“亲，关于您提到的这些退货限制，我想跟您说明一下：\n\n第一，关于‘拆封不能退’。国家工商总局颁布的《网络购买商品七日无理由退货暂行办法》第六条明确规定：‘消费者基于查验需要而打开商品包装，或者为确认商品的品质、功能而进行合理的调试不影响商品的完好。’我只是正常打开检查了一下商品，甚至还保留着原包装，这完全符合‘商品完好’的标准。\n\n第二，关于‘特价商品不能退’。这个也是没有法律依据的。《消费者权益保护法》第二十六条明确禁止商家用格式条款排除消费者的法定权利。如果商家在退货政策里写了‘特价商品不退’，这个条款本身就是违法的无效条款。\n\n第三，关于‘没有质量问题不能退’。七天无理由退货本来就不需要质量问题，这是法律赋予消费者的权利，跟商品有没有质量问题完全没有关系。\n\n综上所述，您的拒绝理由在法律上都不成立。我已经保留了我们这次对话的记录，也会申请平台客服介入处理。如果您坚持拒绝，我将向消费者协会12315投诉，并且会在店铺评价和各大平台分享这次经历。\n\n我不想把事情闹大，希望您能尽快帮我处理退货，谢谢！”",
+                evidence: ["订单截图（包含商品名称、金额、下单时间）", "商品实物照片", "商品外包装照片", "与卖家的聊天记录", "快递单号/签收证明"],
                 hotline: "12315",
                 laws: [
-                    { title: "《消费者权益保护法》第二十五条", desc: "经营者采用网络、电视、电话、邮购等方式销售商品，消费者有权自收到商品之日起七日内退货，且无需说明理由。" },
+                    { title: "《消费者权益保护法》第二十五条", desc: "经营者采用网络、电视、电话、邮购等方式销售商品，消费者有权自收到商品之日起七日内退货，且无需说明理由。但下列商品除外：（一）消费者定作的；（二）鲜活易腐的；（三）在线下载或者消费者拆封的音像制品、计算机软件等数字化商品；（四）交付的报纸、期刊。除前款所列商品外，其他根据商品性质并经消费者在购买时确认不宜退货的商品，不适用无理由退货。" },
                     { title: "《网络交易监督管理办法》第十六条", desc: "网络交易经营者不得以商品已拆封为由拒绝退货，但根据商品性质不宜退货的除外。" }
                 ],
                 strength: 90
             },
             zf: {
-                reason: "根据<strong>《民法典》第七百一十四条</strong>，租期到了你没违约，押金就该全额退还。正常居住造成的磨损属于自然损耗，不算损坏，房东扣钱必须拿出发票和证据。",
-                script: "房东你好，我房子到期了，已经收拾干净并拍了照片。请3天内把押金退给我。要是有损坏想扣钱，请提供维修发票和入住时的对比图，不然我就走住建委投诉和12345了。",
-                rebut: "房东说“多少得扣点”\n回：“要扣钱拿依据出来，没发票我就投诉到12345，不行还能走小额诉讼。”",
-                evidence: ["租赁合同", "房屋照片", "聊天记录", "转账记录"],
+                reason: "押金是房东怕你把房子弄坏了才收的一笔钱，这没问题。但问题在于：什么才算“弄坏了”？法律上有一个很重要的概念叫“正常损耗”，意思是你住进去之后房子自然而然会有的那种磨损，比如墙壁有点旧了、地板有正常使用痕迹了、灯具有点松了等等，这些都不是你的责任，而是房子本身会经历的过程。\n\n比如说，你住了一年，墙上有几个钉子眼、窗帘有点旧了、地板有几道划痕——这些都是正常的住过的痕迹，不是你故意破坏。房东想要扣你的押金，就必须拿出证据证明这些损坏是你造成的，而不是入住前就有的。同时，房东还要拿出正规维修发票来证明维修费用确实发生了。口头说“这里坏了扣200，那里旧了扣300”都是不算数的，法律上这叫举证责任，谁主张谁举证。\n\n还有一点要注意：就算真的有损坏，扣款也要合理。维修费用应该和损坏程度相当，不能房东借题发挥漫天要价。如果房东扣的钱明显超过实际维修费用，你可以要求他提供详细清单和发票，或者直接拒绝支付差额。记住，你是租客不是冤大头，合理维权是你的权利。",
+                script: "房东您好，我是租客<strong>XXX</strong>，租的是您位于<strong>【房屋地址】</strong>的房子，租约已于<strong>XX月XX日</strong>到期，我已经按照合同约定搬离了房屋。\n\n在退房之前，我已经对房屋进行了全面的打扫和整理，也拍了照片留证。整个租住期间，我对房屋尽到了妥善保管的义务，现在房屋的状态是正常的居住磨损，不存在因我个人原因造成的损坏。\n\n按照我们当初签订的租赁合同，我支付了押金<strong>XXX元</strong>。现在租约到期且我没有违反合同条款，这笔押金应当全额退还给我。\n\n我的诉求是这样的：\n1. 请在<strong>3个工作日内</strong>完成押金退还，退到我的<strong>【银行卡号/支付宝/微信】</strong>，账号是<strong>XXX</strong>\n2. 如果您认为房屋存在需要扣款的损坏，请提供：入住时的房屋交接清单或照片（作为对比依据）、损坏现场的照片或视频、正规维修发票和维修清单、具体的扣款金额明细\n3. 如果没有上述依据，我无法认同任何扣款\n\n我理解房东也需要保障自己的权益，但作为租客我也需要维护自己的合法权利。如果押金不能顺利退还，我将向当地住建部门或房管部门投诉、拨打12345市长热线反映情况、通过法律途径解决（小额诉讼程序简单、费用低）。\n\n希望我们能友好协商解决这个问题，谢谢！",
+                rebut: "房东可能会说各种理由要扣钱，比如：“墙壁有几处划痕需要重新粉刷”、“地板有几道划痕要打磨”、“家具有些损坏要赔偿”等等。遇到这种情况，你可以这样回复：\n\n“房东，关于您提到的这些扣款项目，我想跟您逐项确认一下：\n\n首先，关于扣款的合理性。我住进来的时候房屋是什么状态，现在是什么状态，如果有对比照片的话，我们可以对照着看。我住了一年多，正常的居住痕迹肯定是会有的，比如墙壁可能有几个钉子眼、地板可能有轻微划痕，这些是任何房子住久了都会有的正常损耗，不是我的责任。\n\n其次，关于举证的问题。《民法典》第七百一十四条规定，承租人应当妥善保管租赁物，因保管不善造成租赁物毁损、灭失的，应当承担赔偿责任。但这里说的是保管不善造成的毁损、灭失，不是正常的居住使用痕迹。如果您要扣我的押金，必须证明这些损坏是我保管不善造成的，而不是入住前就有的，也不是正常老化。\n\n第三，关于维修费用。如果确实需要维修，请提供正规维修发票。我注意到有些房东会虚报维修费用，比如说墙壁划了一道痕就要收500块的粉刷费，但实际上可能花50块自己买点漆刷一下就好了。我有权要求合理的维修费用。\n\n我的建议是这样的：如果确实有一些小问题需要处理，我们可以协商一个合理的金额，我愿意承担一部分费用。但如果您坚持要扣大笔押金，请提供完整的证据链：入住时的交接清单或照片、损坏的照片、正规发票。否则的话，我会通过法律途径维护自己的权益。\n\n我不想把关系弄僵，但也不想白白损失自己的血汗钱，请房东也理解一下租客的不容易，谢谢！”",
+                evidence: ["房屋租赁合同", "押金收据或转账记录", "入住时的房屋交接清单或照片", "退房时的房屋照片和视频", "与房东的沟通记录", "房屋维修发票（如果有）"],
                 hotline: "12345",
                 laws: [
-                    { title: "《民法典》第七百一十四条", desc: "承租人应当妥善保管租赁物，因保管不善造成租赁物毁损、灭失的，应当承担赔偿责任。正常损耗除外。" },
-                    { title: "《商品房屋租赁管理办法》第七条", desc: "房屋租赁当事人应当依法订立租赁合同。合同内容应当包含押金条款及退还方式。" }
+                    { title: "《民法典》第七百一十四条", desc: "承租人应当妥善保管租赁物，因保管不善造成租赁物毁损、灭失的，应当承担赔偿责任。正常损耗或者因不可归责于承租人的事由造成的损失除外。" },
+                    { title: "《商品房屋租赁管理办法》第七条", desc: "房屋租赁当事人应当依法订立租赁合同。合同内容应当包含押金条款及退还方式。出租人退还押金时，应当同时退还押金利息。" }
                 ],
                 strength: 85
             },
             js: {
-                reason: "根据预付式消费相关规定，商家关门无法提供服务，必须退还剩余余额。没开卡的全额退，开了卡的按次扣除已使用次数。所谓“概不退费”是霸王条款，法律不认可。",
-                script: "你好，我在你们这办的卡还有<strong>XX次</strong>没用，店关了没法继续消费。请7天内退我<strong>XX元</strong>，不然我就找12315投诉了，我也会联合其他会员一起维权。",
-                rebut: "对方说“规定不能退”\n回：“这种格式条款法律不认，我现在就向市场监管局举报。”",
-                evidence: ["会员卡", "缴费凭证", "商家通知", "聊天记录"],
+                reason: "健身房跑路这件事，这两年真的太常见了。但你一定要知道：不管健身房是跑路了、经营不善倒闭了、还是转让给别人了，你的会员权益都是受法律保护的。这不是健身房说一句“公司倒闭了”就能一了百了的。\n\n首先，办卡的时候你付的钱是预付款，健身房收了你的钱就有义务给你提供服务。现在店关了、服务没了，这就是健身房违约在先。《消费者权益保护法》第五十三条写得清清楚楚：经营者收了预付款但没提供服务的，应当退钱。这是法定义务，不是什么优惠政策。\n\n其次，健身房跟你说“办了卡就不能退”、“消费了就不能退”这种话，全都是违法的格式条款。《民法典》第四百九十七条规定，提供格式条款一方不合理地免除或者减轻其责任、加重对方责任、限制对方主要权利的，该格式条款无效。你办的健身卡，还没用完呢，凭什么不能退？\n\n还有一点很重要：就算你用过几次了，也应该按比例退剩余的钱。比如你办了5000块50次的卡，用了10次，剩下40次，那健身房应该退你5000÷50×40=4000块，而不是各种乱七八糟的扣费。那些“手续费”、“管理费”、“已经生效不能退”什么的，全都是他们自己想出来的，没有法律依据。",
+                script: "您好，我是贵健身房（店名：<strong>XXX</strong>，地址：<strong>XXX</strong>）的会员，会员卡号是<strong>XXX</strong>，办卡时间是<strong>XX月XX日</strong>，当时缴纳的费用是<strong>XXX元</strong>，卡内还剩余<strong>XXX次/XXX天</strong>。\n\n我了解到健身房已经关门/转让/停业了（具体是：<strong>【说明情况】</strong>），我已经无法继续享受会员服务。\n\n办卡的时候你们承诺的服务，现在因为你们的原因无法继续提供，这是明显的违约行为。作为消费者，我有以下诉求：\n\n1. <strong>退还剩余会员费用</strong>：根据我的消费记录和剩余次数/天数，请退还我<strong>XXX元</strong>。计算方式是：办卡总费用<strong>XXX元</strong>÷总次数（或总天数）×剩余次数（或剩余天数）=应退金额<strong>XXX元</strong>。\n\n2. 退款时间：请在<strong>7个工作日内</strong>将款项退回到我的账户，账户信息如下：<strong>【银行卡号/支付宝账号】</strong>\n\n我办理健身卡是为了锻炼身体，现在店都没了，我的合法权益受到了侵害。《消费者权益保护法》第五十三条规定，经营者以预收款方式提供服务，未按照约定提供的，应当退回预付款。请健身房依法处理此事。\n\n如果健身房不能给出合理解决方案，我将采取以下措施：向消费者协会12315投诉、向市场监管部门反映、在各大平台分享这次经历提醒其他消费者、联合其他受害会员集体维权、通过法律途径起诉。\n\n希望健身房能负起应尽的责任，妥善解决会员的退款问题。谢谢！",
+                rebut: "健身房工作人员可能会说各种推脱的话，比如：“这是公司规定，卡办了就不能退”、“你已经开卡了，不在退款范围内”、“老板跑路了，我们也没办法”、“可以转去其他店，但需要补差价”等等。遇到这些情况，你可以这样回复：\n\n“关于您提到的这些说法，我想逐一回应一下：\n\n第一，关于公司规定卡不能退。我要告诉您，《民法典》第四百九十七条明确规定：提供格式条款一方不合理地免除或者减轻其责任、加重对方责任、限制对方主要权利的，该格式条款无效。办卡不能退这种条款属于限制消费者主要权利的格式条款，在法律上是无效的。您不能拿一个违法的规定来拒绝给我退款。\n\n第二，关于已经开卡了不能退。开卡不代表我就放弃退款权利了。《消费者权益保护法》第五十三条规定的是未按照约定提供服务的，应当退回预付款，并没有说开卡了就不能退。我付了钱，你们没按约定把服务提供完，剩余的服务费当然应该退给我。\n\n第三，关于老板跑路了没办法。这个说法在法律上是站不住脚的。健身房作为一个经营主体，即使老板跑了，公司还在。公司有义务承担债务。如果健身房已经注销或破产，那就更应该退还会员的预付款，因为这些钱是属于消费者的。\n\n第四，关于转店需要补差价。这个方案我无法接受。当初办卡的时候就是冲着这家店来的，环境和教练都是冲着这个店才付的钱。现在店没了，凭什么要我加钱去别的店？\n\n我现在就一个诉求：<strong>退还我剩余的会员费用XXX元</strong>。如果不退，我会联合所有受害会员一起维权，法律途径、媒体曝光、监管部门投诉，一个都不会少。请健身房认真对待，不要把我们逼到那一步。谢谢！”",
+                evidence: ["会员卡/会员协议", "缴费凭证（收据、转账记录、支付截图）", "会员卡使用记录（如果有）", "健身房关门/转让的通知（短信、公告、朋友圈截图）", "健身房工作人员的沟通记录", "其他受害会员的联系方式（便于集体维权）"],
                 hotline: "12315",
                 laws: [
-                    { title: "《消费者权益保护法》第五十三条", desc: "经营者以预收款方式提供商品或者服务的，应当按照约定提供。未按照约定提供的，应当按照消费者的要求履行约定或者退回预付款。" },
-                    { title: "《单用途商业预付卡管理办法》第二十一条", desc: "发卡企业或售卡企业应依单用途卡章程或协议约定，提供退卡服务。" }
+                    { title: "《消费者权益保护法》第五十三条", desc: "经营者以预收款方式提供商品或者服务的，应当按照约定提供。未按照约定提供的，应当按照消费者的要求履行约定或者退回预付款，并应当承担预付款的利息、消费者必须支付的合理费用。" },
+                    { title: "《民法典》第四百九十七条", desc: "有下列情形之一的，该格式条款无效：（一）具有本法第一编第六章第三节和本节规定的无效情形；（二）提供格式条款一方不合理地免除或者减轻其责任、加重对方责任、限制对方主要权利；（三）提供格式条款一方排除对方主要权利。" }
                 ],
                 strength: 88
             },
@@ -1929,13 +2662,13 @@
                 strength: 84
             },
             qt: {
-                reason: "消费纠纷记住三个要点：<strong>留证据、讲法律、敢维权</strong>。大部分情况都有法规保护你，别怕对方态度凶。",
-                script: "你好，我遇到个问题：<strong>XX</strong>。证据我这里都有，麻烦给个合理的处理方案，不然只能找12315投诉了。",
-                rebut: "对方说“这是公司规定”\n回：“请拿规定的正式文件给我看，没依据的话我就找上级或监管部门反映。”",
-                evidence: ["相关凭证", "聊天记录", "照片视频"],
+                reason: "不管你遇到的是什么类型的消费纠纷，有三件事是你必须记住的：\n\n第一，<strong>证据为王</strong>。不管发生什么问题，第一时间保留证据。聊天记录不要删、付款截图要保存、现场照片要拍、发票收据要留好。很多人等到要维权了才发现证据没了，那时候就真的只能吃哑巴亏了。证据是你维权的基础，没有证据你说破天也没用。\n\n第二，<strong>法律是你最大的靠山</strong>。很多人觉得自己是消费者，商家是企业，自己肯定说不过人家。这种想法是错的！《消费者权益保护法》就是为你这样的普通消费者量身定做的，法律给了你很多权利，比如知情权、公平交易权、求偿权等等。遇到问题不要怕，先查查相关法律条文，你可能比你想象的更有底气。\n\n第三，<strong>敢开口、敢维权</strong>。很多消费者吃亏就吃亏在一个“怕”字上。怕麻烦、怕得罪人、怕投诉没人理。但你要知道，你维护的是自己的合法权益，这不是无理取闹。商家最怕的就是较真的消费者，只要你证据充分、诉求合理，大部分商家都会选择息事宁人。真遇到硬气的，走法律途径也不复杂，现在诉讼费用很低，小额诉讼程序简单到你自己就能搞定。\n\n记住：你是消费者，你的每一分钱都值得被尊重！",
+                script: "您好，我是消费者<strong>XXX</strong>，关于我在贵店（公司）遇到的问题，想要进行沟通。\n\n事情经过是这样的：<strong>【简要描述你的情况，比如：在什么时间、什么地点、买了什么产品或服务、花了多少钱、遇到了什么问题】</strong>\n\n关于这个问题，我有以下几点说明：\n\n1. <strong>关于我的诉求</strong>：<strong>【明确说出你想要什么：退款、换货、赔偿、道歉等】</strong>\n\n2. <strong>关于时间要求</strong>：我希望能在<strong>【具体日期】</strong>之前得到处理结果，最晚不超过<strong>【更晚的日期】</strong>。如果超过这个时间没有得到处理，我会继续寻求其他解决途径。\n\n3. <strong>关于我的态度</strong>：我写这封信不是为了找麻烦，而是希望能友好地解决这个问题。我希望我们能通过沟通达成共识，避免把事情复杂化。\n\n4. <strong>关于证据</strong>：我这边保留了相关的证据，包括<strong>【列出你有的证据：订单截图、付款记录、聊天记录、照片等】</strong>，随时可以提供。\n\n我知道处理这类问题可能需要一些时间，也理解商家可能需要核实情况。但我也希望商家能理解消费者的立场：<strong>【说出你的感受和困难】</strong>\n\n如果这次沟通不能得到满意的处理，我会：\n- 向消费者协会（12315）投诉\n- 向相关监管部门反映\n- 在平台公开评价中如实反映情况\n- 通过法律途径解决\n\n但我更希望我们能在这里把问题解决好，不用走到那一步。期待您的回复，谢谢！",
+                rebut: "对方可能会用各种方式推脱，比如：“这是公司规定，我们也没办法”、“这个情况比较特殊，不在退款范围内”、“你可以去投诉，我们无所谓”、“我们已经尽力了，你再纠缠也没用”等等。遇到这些情况，你可以这样回复：\n\n“关于您提到的这些说法，我想说明一下我的立场：\n\n首先，关于‘公司规定’。我要提醒您，《民法典》和《消费者权益保护法》都明确规定，商家自己制定的格式条款不能违反国家法律，不能不合理地免除自己的责任、加重消费者的负担。如果所谓的‘公司规定’与国家法律相冲突，这个规定就是无效的。所以，请不要拿一个可能违法的‘公司规定’来拒绝我的合理诉求。\n\n其次，关于‘特殊情况’。我不知道您说的‘特殊情况’具体指什么，但如果这件事本来就在消费者权益保护的范围之内，就不存在什么特殊情况。法律保护的是所有消费者的合法权益，不会因为商家的经营成本或者其他原因而网开一面。\n\n第三，关于‘你去投诉我们无所谓’。说实话，说出这种话的商家，要么是真的不在乎声誉，要么是在虚张声势。作为消费者，我并不想把事情闹大，但如果商家确实不愿意协商解决，那我只能通过其他途径维护自己的权益。至于最终会采取什么措施，取决于商家的态度。\n\n我现在的诉求很简单：<strong>【重复你的具体诉求】</strong>。这个诉求是完全合理的，也是有法律依据的。\n\n我希望商家能认真对待每一位消费者的诉求，而不是用敷衍、推脱的态度来应对。消费者选择这家店消费，是出于信任；如果处理问题的方式让消费者失望，失去的不只是一个顾客的口碑。\n\n请在<strong>【具体日期】</strong>之前给我一个明确的答复。如果到时候还是没有实质性进展，我将不得不采取进一步措施。谢谢！”",
+                evidence: ["消费凭证（发票、收据、订单截图）", "付款记录（转账记录、支付截图）", "与商家的沟通记录（聊天记录、邮件、短信）", "现场照片或视频", "产品说明书、保修卡等相关文件", "其他能证明你权益受损的材料"],
                 hotline: "12315",
                 laws: [
-                    { title: "《消费者权益保护法》第三十九条", desc: "消费者和经营者发生消费者权益争议的，可以通过与经营者协商和解、请求消费者协会或者依法成立的其他调解组织调解等途径解决。" },
+                    { title: "《消费者权益保护法》第三十九条", desc: "消费者和经营者发生消费者权益争议的，可以通过与经营者协商和解、请求消费者协会或者依法成立的其他调解组织调解、向有关行政部门投诉、根据与经营者达成的仲裁协议提请仲裁机构仲裁、向人民法院提起诉讼等途径解决。" },
                     { title: "《民法典》第一千一百六十五条", desc: "行为人因过错侵害他人民事权益造成损害的，应当承担侵权责任。" }
                 ],
                 strength: 75
@@ -2557,6 +3290,7 @@
             curTxt = '';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        window.resetAll = resetAll;
 
         // ---- 弹窗 ----
         function showModal(title, text, icon) {
@@ -2571,17 +3305,24 @@
         }
 
         // 反馈弹窗功能
+        var feedbackModal = document.getElementById('feedbackModal');
+        var feedbackTextarea = document.getElementById('feedbackTextarea');
+        var feedbackCancelBtn = document.getElementById('feedbackCancelBtn');
+        var feedbackSubmitBtn = document.getElementById('feedbackSubmitBtn');
+
         function openFeedbackModal() {
-            document.getElementById('feedbackModal').classList.add('show');
+            feedbackModal.classList.add('show');
+            setTimeout(function() {
+                feedbackTextarea.focus();
+            }, 100);
         }
 
         function closeFeedbackModal() {
-            document.getElementById('feedbackModal').classList.remove('show');
-            document.getElementById('feedbackTextarea').value = '';
+            feedbackModal.classList.remove('show');
         }
 
         function submitFeedback() {
-            var feedback = document.getElementById('feedbackTextarea').value.trim();
+            var feedback = feedbackTextarea.value.trim();
             if (!feedback) {
                 showModal('提示', '请输入反馈内容', '💡');
                 return;
@@ -2601,16 +3342,14 @@
             showModal('感谢', '反馈已提交，感谢你的意见！', '🎉');
         }
 
-        // 绑定反馈链接点击事件
+        // 绑定反馈弹窗事件
         document.getElementById('feedbackLink').addEventListener('click', openFeedbackModal);
-
-        // 绑定反馈弹窗按钮事件
-        document.getElementById('feedbackCancelBtn').addEventListener('click', closeFeedbackModal);
-        document.getElementById('feedbackSubmitBtn').addEventListener('click', submitFeedback);
+        feedbackCancelBtn.addEventListener('click', closeFeedbackModal);
+        feedbackSubmitBtn.addEventListener('click', submitFeedback);
 
         // 点击反馈弹窗外部关闭
-        document.getElementById('feedbackModal').addEventListener('click', function(e) {
-            if (e.target === this) closeFeedbackModal();
+        feedbackModal.addEventListener('click', function(e) {
+            if (e.target === feedbackModal) closeFeedbackModal();
         });
 
         // 点击弹窗外部关闭
